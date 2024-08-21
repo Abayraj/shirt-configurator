@@ -1,18 +1,28 @@
 import React, { useMemo, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Color, MeshBasicMaterial, MeshStandardMaterial } from "three";
+import { useFrame } from "@react-three/fiber";
 
 export function Shirt(props) {
+  const ref = useRef();
   const { nodes, materials } = useGLTF("/shirt.glb");
 
-  const bloomColor = new Color("#ff233f");
+  useFrame((state, delta) => {
+    ref.current.rotation.y += delta;
+  });
 
-  const customMaterial = useMemo(() => new MeshStandardMaterial({
-    color: bloomColor,
-    toneMapped: false, // This will prevent the color from being affected by tone mapping
-  }), [])
+  const bloomColor = new Color("#ffffff");
+
+  const customMaterial = useMemo(
+    () =>
+      new MeshStandardMaterial({
+        color: bloomColor,
+        toneMapped: false,
+      }),
+    []
+  );
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={ref}>
       <mesh
         castShadow
         receiveShadow

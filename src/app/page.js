@@ -6,7 +6,6 @@ import Scene from "@/components/scene/Scene";
 import { Leva } from "leva";
 
 export default function Home() {
-  console.log("heloooo")
   return (
     <>
     <LoadingScreen />

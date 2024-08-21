@@ -1,10 +1,17 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 export function Hoodie(props) {
+  const ref = useRef();
   const { nodes, materials } = useGLTF("/hoodie.glb");
+
+  useFrame((state, delta) => {
+    ref.current.rotation.y += delta;
+  });
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={ref}>
       <group position={[0.013, 0.392, -0.095]}>
         <mesh
           castShadow
