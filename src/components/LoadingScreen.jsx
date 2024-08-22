@@ -12,8 +12,6 @@ export default function LoadingScreen() {
 
   const [overlay, setOverlay] = useState(false);
 
-  console.log("herloo");
-
   const setSelectedModel = useModelStore((state) => state.setSelectedModel);
 
   const handleModelSelect = (model) => {
@@ -45,9 +43,9 @@ const Overlay = ({ onModelSelect, overlay }) => {
   return (
     <div
       ref={overlayRef}
-      className="h-svh w-full fixed top-0 left-0 overflow-hidden flex flex-col  items-center justify-center bg-black z-40 gap-2 "
+      className="h-svh w-full fixed top-0 left-0 overflow-hidden flex flex-col  items-center justify-center bg-black z-40 gap-2 ovarlay2 "
     >
-      <h1 className=" text-4xl lg:pb-10 font-secondary font-bold">
+      <h1 className=" text-2xl lg:text-4xl lg:pb-10 font-secondary font-bold">
         Choose Your Model
       </h1>
       <div className="flex flex-col lg:flex-row lg:gap-5 items-center justify-center">
@@ -55,14 +53,26 @@ const Overlay = ({ onModelSelect, overlay }) => {
           className="flex flex-col  items-center cursor-pointer"
           onClick={() => onModelSelect("shirt")}
         >
-          <Image src="/shirt.png" alt="logo" width={200} height={200} />
+          <Image
+            src="/shirt.png"
+            alt="logo"
+            width={200}
+            height={200}
+            className="object-contain"
+          />
           <h1 className="text-3xl uppercase">Shirt</h1>
         </div>
         <div
           className="flex flex-col items-center cursor-pointer"
           onClick={() => onModelSelect("hoodie")}
         >
-          <Image src="/hoodie.png" alt="logo" width={200} height={200} />
+          <Image
+            src="/hoodie.png"
+            alt="logo"
+            width={200}
+            height={200}
+            className="object-contain"
+          />
           <h1 className="text-3xl uppercase">Hoodie</h1>
         </div>
       </div>

@@ -1,13 +1,22 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import useModelStore from "@/store/useStore";
+import { Color, MeshStandardMaterial } from "three";
 
 export function Hoodie(props) {
   const ref = useRef();
   const { nodes, materials } = useGLTF("/hoodie.glb");
 
+  const { color, isRotating } = useModelStore();
+
   useFrame((state, delta) => {
-    ref.current.rotation.y += delta;
+    if (isRotating) {
+      ref.current.rotation.y += delta;
+    }
+    if (materials.cloth) {
+      materials.cloth.color.set(color);
+    }
   });
 
   return (
@@ -18,18 +27,6 @@ export function Hoodie(props) {
           receiveShadow
           geometry={nodes.Object_11.geometry}
           material={materials.hoodie}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_11_1.geometry}
-          material={materials["2155_U-circular_French_Terry_FRONT_39599_5"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_11_2.geometry}
-          material={materials["2155_U-circular_French_Terry_FRONT_39599_7"]}
         />
       </group>
     </group>

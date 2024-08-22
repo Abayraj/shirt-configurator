@@ -1,33 +1,37 @@
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { Color, MeshBasicMaterial, MeshStandardMaterial } from "three";
+import {
+  Color,
+  MeshStandardMaterial,
+  RepeatWrapping,
+  TextureLoader,
+} from "three";
 import { useFrame } from "@react-three/fiber";
+import useModelStore from "@/store/useStore";
 
 export function Shirt(props) {
   const ref = useRef();
   const { nodes, materials } = useGLTF("/shirt.glb");
+  const { color, isRotating, image } = useModelStore();
+
+
 
   useFrame((state, delta) => {
-    ref.current.rotation.y += delta;
+    if (isRotating) {
+      ref.current.rotation.y += delta;
+    }
+    if (materials.cloth) {
+      materials.cloth.color.set(color); 
+    }
   });
 
-  const bloomColor = new Color("#ffffff");
-
-  const customMaterial = useMemo(
-    () =>
-      new MeshStandardMaterial({
-        color: bloomColor,
-        toneMapped: false,
-      }),
-    []
-  );
   return (
     <group {...props} dispose={null} ref={ref}>
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Object_4.geometry}
-        material={customMaterial}
+        material={materials.cloth}
         rotation={[Math.PI / 2, 0, -1.619]}
       />
     </group>

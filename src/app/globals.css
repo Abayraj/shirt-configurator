@@ -9,7 +9,20 @@
 }
 
 body {
-  background: #000000;
+  background: #0f0c29; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   color: #fff;
 }
 
@@ -21,4 +34,34 @@ body {
 }
 ::-webkit-scrollbar-track {
   background-color: #000000;
+}
+
+.ovarlay {
+  background: #00000053;
+  border-radius: 0px 10px 10px 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.small .react-colorful {
+  width: 120px;
+  height: 120px;
+}
+
+.small .react-colorful__saturation-pointer {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.small .react-colorful__hue-pointer {
+  width: 1px;
+  height: 15px;
+  border-radius: 3px;
+}
+
+.ovarlay2 {
+  background: #00000053;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }

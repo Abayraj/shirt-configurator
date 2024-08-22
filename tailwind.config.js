@@ -7,6 +7,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+      
       fontFamily: {
         primary: "var(--font-cormorant_upright)",
         secondary: "var(--font-open_sans)",

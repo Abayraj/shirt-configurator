@@ -1,10 +1,14 @@
 import { create } from "zustand";
 
 const useModelStore = create((set) => ({
-  loading: false,
-  setLoading: (value) => set({ loading: value }),
-  selectedModel: "null", 
+  selectedModel: "null",
   setSelectedModel: (model) => set({ selectedModel: model }),
+  color: "#ffffff",
+  setColor: (color) => set({ color }),
+  isRotating: true,
+  setIsRotating: (value) => set({ isRotating: value }),
+  image: null,
+  setImage: (image) => set({ image }),
 }));
 
 export default useModelStore;
