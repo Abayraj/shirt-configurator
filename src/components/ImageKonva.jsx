@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Image, Transformer } from "react-konva";
 import useImage from "use-image";
@@ -27,6 +28,7 @@ export default function ImageKonva() {
   const handleButtonClick = () => {
     fileInputRef.current.click();
     setOpen(true);
+    setImage(true)
   };
 
   const handleImageInput = (e) => {
@@ -38,7 +40,6 @@ export default function ImageKonva() {
         const img = new window.Image();
         img.src = event.target.result;
         img.onload = () => {
-          setImage(img);
           const aspectRatio = img.width / img.height;
           const newWidth = 150;
           const newHeight = newWidth / aspectRatio;

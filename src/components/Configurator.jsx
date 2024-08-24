@@ -1,9 +1,13 @@
+"use client";
+
 import useModelStore from "@/store/useStore";
 import React, { useState } from "react";
-
+import dynamic from "next/dynamic";
 import { HexColorPicker } from "react-colorful";
 import { IoMdArrowDropup } from "react-icons/io";
-import ImageKonva from "./ImageKonva";
+const ImageKonva = dynamic(() => import("@/components/ImageKonva"), {
+  ssr: false,
+});
 
 export default function Configurator() {
   const { isRotating, setIsRotating, color, setColor } = useModelStore();

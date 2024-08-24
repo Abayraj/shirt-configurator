@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Shirt } from "./models/Shirt";
 import Lights from "./utils/Lights";
 import Effects from "./utils/Effects";
-import { CameraControls, MeshReflectorMaterial } from "@react-three/drei";
+import { CameraControls, } from "@react-three/drei";
 import { Hoodie } from "./models/Hoodie";
 import useModelStore from "@/store/useStore";
 

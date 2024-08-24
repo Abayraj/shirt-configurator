@@ -7,7 +7,7 @@ import * as THREE from "three";
 export function Hoodie(props) {
   const ref = useRef();
   const { nodes, materials } = useGLTF("/hoodie.glb");
-  const { color, isRotating } = useModelStore();
+  const { color, isRotating, image } = useModelStore();
 
   const textureRef = useRef();
 
@@ -21,6 +21,7 @@ export function Hoodie(props) {
   texture.wrapT = THREE.RepeatWrapping;
 
   textureRef.current = texture;
+
 
   useFrame((state, delta) => {
     if (isRotating) {
@@ -49,10 +50,7 @@ export function Hoodie(props) {
           geometry={nodes.Object_11.geometry}
           material={materials.hoodie}
         />
-        <mesh
-          geometry={nodes.Object_11.geometry}
-          material={customMaterial}
-        />
+        <mesh geometry={nodes.Object_11.geometry} material={customMaterial} />
       </group>
     </group>
   );

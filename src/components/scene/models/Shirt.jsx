@@ -7,11 +7,9 @@ import * as THREE from "three";
 export function Shirt(props) {
   const ref = useRef();
   const { nodes, materials } = useGLTF("/shirt.glb");
-  const { color, isRotating,image } = useModelStore();
+  const { color, isRotating, image } = useModelStore();
 
   const textureRef = useRef();
-
-
 
   const canvas = Array.from(document.getElementsByTagName("canvas"))[1];
   const ctx = canvas.getContext("2d");
