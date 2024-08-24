@@ -1,9 +1,9 @@
 import useModelStore from "@/store/useStore";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
-import ColorPallet from "./ColorPallet";
 import { HexColorPicker } from "react-colorful";
 import { IoMdArrowDropup } from "react-icons/io";
+import ImageKonva from "./ImageKonva";
 
 export default function Configurator() {
   const { isRotating, setIsRotating, color, setColor } = useModelStore();
@@ -13,13 +13,55 @@ export default function Configurator() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col p-3 gap-5  ">
-      <h1 className=" uppercase text-center  font-semibold text-xl font-secondary">
+    <div className="w-full h-full flex flex-col p-2 gap-2 lg:gap-4  ">
+      <h1 className=" uppercase text-center  font-semibold text-xl font-secondary hidden lg:flex">
         Configurator
       </h1>
 
-      <Accordion title="Rotation">
-        <div className="flex justify-center items-center text-center gap-1 ">
+      <div className="hidden lg:block">
+        <Accordion title="Rotation">
+          <div className="flex justify-center items-center text-center gap-1 ">
+            <input
+              type="checkbox"
+              checked={isRotating}
+              onChange={handleRotationChange}
+              id="rotation-checkbox"
+            />
+            <p>Rotation</p>
+          </div>
+        </Accordion>
+      </div>
+
+      <div className="hidden lg:block">
+        <Accordion title="Garment color">
+          <div className=" small">
+            <HexColorPicker color={color} onChange={setColor} />
+          </div>
+        </Accordion>
+      </div>
+
+      <MobileView />
+
+      {/* ImageKonva */}
+
+      <ImageKonva />
+    </div>
+  );
+}
+
+const MobileView = () => {
+  const { isRotating, setIsRotating, color, setColor } = useModelStore();
+
+  const handleRotationChange = (event) => {
+    setIsRotating(event.target.checked);
+  };
+  return (
+    <div className="lg:hidden">
+      <Accordion title="Color">
+        <div className="small">
+          <HexColorPicker color={color} onChange={setColor} />
+        </div>
+        <div className="flex  justify-center items-center  gap-1 border rounded-md p-1">
           <input
             type="checkbox"
             checked={isRotating}
@@ -29,17 +71,9 @@ export default function Configurator() {
           <p>Rotation</p>
         </div>
       </Accordion>
-
-      <Accordion title="Garment color">
-        <div className="small">
-          <HexColorPicker color={color} onChange={setColor} />
-        </div>
-      </Accordion>
-
-      {/* ImageKonva */}
     </div>
   );
-}
+};
 
 const Accordion = ({ children, title }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +98,7 @@ const Accordion = ({ children, title }) => {
         </div>
       </div>
       <div
-        className={`overflow-hidden  transition-all duration-500 ease-in-out ${
+        className={`overflow-hidden  transition-all duration-500 ease-in-out flex justify-between items-start  ${
           isOpen ? "max-h-[130px]" : "max-h-0"
         }`}
       >

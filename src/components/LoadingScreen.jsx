@@ -32,7 +32,7 @@ const Overlay = ({ onModelSelect, overlay }) => {
   useGSAP(() => {
     if (overlay) {
       gsap.to(overlayRef.current, {
-        duration: 1,
+        duration: 0.5,
         opacity: 0,
         onComplete: () => {
           overlayRef.current.style.display = "none";
