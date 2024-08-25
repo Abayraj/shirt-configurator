@@ -37,10 +37,11 @@ export default function Experience() {
         ""
       )}
 
-      {selectedModel === "hoodie" ? <Hoodie position={[0, 0.1, 0]} /> : ""}
+      {/* {selectedModel === "hoodie" ? <Hoodie position={[0, 0.1, 0]} /> : ""} */}
+
 
       <Lights />
-      {/* <Effects /> */}
+      <Effects />
     </>
   );
 }

@@ -3,6 +3,7 @@
 import useModelStore from "@/store/useStore";
 import { useGSAP } from "@gsap/react";
 import { useProgress } from "@react-three/drei";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
@@ -40,40 +41,50 @@ const Overlay = ({ onModelSelect, overlay }) => {
       });
     }
   }, [overlay]);
+
   return (
     <div
       ref={overlayRef}
-      className="h-svh w-full fixed top-0 left-0 overflow-hidden flex flex-col  items-center justify-center bg-black z-40 gap-2 ovarlay2 "
+      className="h-svh w-full fixed top-0 left-0 overflow-hidden flex items-center justify-center z-40  ovarlay2 "
     >
-      <h1 className=" text-2xl lg:text-4xl lg:pb-10 font-secondary font-bold">
-        Choose Your Model
-      </h1>
-      <div className="flex flex-col lg:flex-row lg:gap-5 items-center justify-center">
-        <div
-          className="flex flex-col  items-center cursor-pointer"
-          onClick={() => onModelSelect("shirt")}
-        >
-          <Image
-            src="/shirt.png"
-            alt="logo"
-            width={200}
-            height={200}
-            className="object-contain"
-          />
-          <h1 className="text-3xl uppercase">Shirt</h1>
-        </div>
-        <div
-          className="flex flex-col items-center cursor-pointer"
-          onClick={() => onModelSelect("hoodie")}
-        >
-          <Image
-            src="/hoodie.png"
-            alt="logo"
-            width={200}
-            height={200}
-            className="object-contain"
-          />
-          <h1 className="text-3xl uppercase">Hoodie</h1>
+      <div className="flex flex-col  items-center justify-center">
+        <h1 className=" text-3xl lg:text-4xl pb-10 lg:pb-20  font-bold wave">
+          <span>Choose</span>
+          <span>Your</span>
+          <span>Model</span>
+        </h1>
+        <div className="flex flex-col lg:flex-row justify-center gap-5 lg:gap-10">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            transition={{ ease: "linear" }}
+            className="flex flex-col  items-center frosted-glass"
+            onClick={() => onModelSelect("shirt")}
+          >
+            <Image
+              src="/shirt2.svg"
+              alt="Shirt Icon"
+              width={150}
+              height={100}
+            />
+
+            <h1 className="text-3xl uppercase font-secondary">Shirt</h1>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            transition={{ ease: "linear" }}
+            className="flex flex-col items-center  frosted-glass "
+            onClick={() => onModelSelect("hoodie")}
+          >
+            <Image
+              src="/hoodie2.svg"
+              alt="Shirt Icon"
+              width={150}
+              height={100}
+            />
+
+            <h1 className="text-3xl uppercase font-secondary">Hoodie</h1>
+          </motion.div>
         </div>
       </div>
     </div>
@@ -95,12 +106,13 @@ const Loader = ({ progress }) => {
     }
   }, [progress]);
   return (
-    <div
-      ref={loaderRef}
-      className={`fixed top-0 left-0 z-50 bg-black h-svh w-full flex gap-2 flex-col justify-center items-center`}
-    >
-      <h1 className="text-4xl text-white font-primary">WelCome...</h1>
-      <div className="relative w-96 bg-black rounded-3xl z-10">
+    <div ref={loaderRef} className="backgroundAnimate">
+      <div className="loader JS_on">
+        <span className="binary"></span>
+        <span className="binary"></span>
+        <span className="getting-there ">LOADING STUFF...</span>
+      </div>
+      <div className="relative w-96 max-w-[calc(100%-50%)] bg-black rounded-3xl z-10 mt-6">
         <div
           className="h-1  origin-left transition-all duration-300 ease-in-out bg-white rounded-3xl"
           style={{ width: `${progress}%` }}

@@ -6,7 +6,7 @@ export default function Lights() {
     <>
       <ambientLight intensity={1} />
 
-      <Environment preset="city" />
+      <Environment preset="studio" />
     </>
   );
 }
