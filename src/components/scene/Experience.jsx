@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { Shirt } from "./models/Shirt";
-import Effects from "./utils/Effects";
-import { CameraControls, ContactShadows, Environment, MeshReflectorMaterial } from "@react-three/drei";
+import {
+  CameraControls,
+  Environment,
+  MeshReflectorMaterial,
+} from "@react-three/drei";
 import { Hoodie } from "./models/Hoodie";
 import useModelStore from "@/store/useStore";
-import { Stage1 } from "./models/Stage1";
 import { Stage2 } from "./models/Stage2";
 
 export default function Experience() {
@@ -44,17 +46,7 @@ export default function Experience() {
 
       <Stage2 scale={6} />
 
-      <ContactShadows
-        frames={1}
-        rotation-x={[Math.PI / 2]}
-        position={[0, -0.4, 0]}
-        far={1}
-        width={1.5}
-        height={1.5}
-        blur={0.2}
-      />
-
-<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
         <planeGeometry args={[50, 50]} />
         <MeshReflectorMaterial
           blur={[1000, 1000]}
@@ -70,10 +62,24 @@ export default function Experience() {
         />
       </mesh>
 
-      <ambientLight intensity={0.5} />
+      {/* <directionalLight
+        castShadow
+        intensity={3.5}
+        position={[1, 10, 1]}
+        shadow-mapSize={[1024, 1024]}
+        shadow-camera-near={10}
+        shadow-camera-far={150}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+        shadow-bias={0.35}
+        shadow-normalBias={0.5}
+      /> */}
+
+      {/* <directionalLightHelper /> */}
 
       <Environment preset="city" />
-      <Effects />
     </>
   );
 }

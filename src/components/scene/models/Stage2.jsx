@@ -3,6 +3,10 @@ import { Loader, useGLTF } from "@react-three/drei";
 
 export function Stage2(props) {
   const { nodes, materials } = useGLTF("/tubelight.glb");
+
+  materials.stage.emissiveIntensity = 1;
+  materials.light.emissiveIntensity = 20;
+
   return (
     <group {...props} dispose={null}>
       <mesh
