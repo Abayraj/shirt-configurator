@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import { Loader } from "@react-three/drei";
 
 export default function LoadingScreen() {
   const { progress } = useProgress();
@@ -22,7 +23,7 @@ export default function LoadingScreen() {
   return (
     <>
       <Overlay onModelSelect={handleModelSelect} overlay={overlay} />
-      <Loader progress={progress} />
+      <LoaderScreen progress={progress} />
     </>
   );
 }
@@ -60,12 +61,7 @@ const Overlay = ({ onModelSelect, overlay }) => {
             className="flex flex-col  items-center "
             onClick={() => onModelSelect("shirt")}
           >
-            <Image
-              src="/shirt.jpg"
-              alt="Shirt Icon"
-              width={150}
-              height={100}
-            />
+            <Image src="/shirt.jpg" alt="Shirt Icon" width={150} height={100} />
 
             <h1 className="text-3xl uppercase font-myriad-light">Shirt</h1>
           </motion.div>
@@ -91,33 +87,36 @@ const Overlay = ({ onModelSelect, overlay }) => {
   );
 };
 
-const Loader = ({ progress }) => {
-  const loaderRef = useRef();
+const LoaderScreen = ({ progress }) => {
+  // const loaderRef = useRef();
 
-  useGSAP(() => {
-    if (progress === 100) {
-      gsap.to(loaderRef.current, {
-        duration: 1,
-        opacity: 0,
-        onComplete: () => {
-          loaderRef.current.style.display = "none";
-        },
-      });
-    }
-  }, [progress]);
+  // useGSAP(() => {
+  //   if (progress === 100) {
+  //     gsap.to(loaderRef.current, {
+  //       duration: 1,
+  //       opacity: 0,
+  //       onComplete: () => {
+  //         loaderRef.current.style.display = "none";
+  //       },
+  //     });
+  //   }
+  // }, [progress]);
   return (
-    <div ref={loaderRef} className="backgroundAnimate">
-      <div className="loader JS_on">
-        <span className="binary"></span>
-        <span className="binary"></span>
-        <span className="getting-there ">LOADING STUFF...</span>
-      </div>
-      <div className="relative w-96 max-w-[calc(100%-50%)] bg-black rounded-3xl z-10 mt-6">
-        <div
-          className="h-1  origin-left transition-all duration-300 ease-in-out bg-white rounded-3xl"
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
-    </div>
+    <>
+      <Loader />
+    </>
+    // <div ref={loaderRef} className="backgroundAnimate">
+    //   <div className="loader JS_on">
+    //     <span className="binary"></span>
+    //     <span className="binary"></span>
+    //     <span className="getting-there ">LOADING STUFF...</span>
+    //   </div>
+    //   <div className="relative w-96 max-w-[calc(100%-50%)] bg-black rounded-3xl z-10 mt-6">
+    //     <div
+    //       className="h-1  origin-left transition-all duration-300 ease-in-out bg-white rounded-3xl"
+    //       style={{ width: `${progress}%` }}
+    //     ></div>
+    //   </div>
+    // </div>
   );
 };

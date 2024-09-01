@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { Loader, useGLTF } from "@react-three/drei";
 
 export function Stage2(props) {
   const { nodes, materials } = useGLTF("/tubelight.glb");
