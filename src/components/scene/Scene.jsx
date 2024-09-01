@@ -11,12 +11,12 @@ export default function Scene() {
       dpr={[1, 1.5]}
       shadows
       camera={{ position: [0, 0, 3], fov: 30 }}
-      // gl={{
-      //   antialias: false,
-      //   toneMapping: THREE.LinearToneMapping,
-      //   toneMappingExposure: 2,
-      //   preserveDrawingBuffer: true,
-      // }}
+      gl={{
+        antialias: true,
+        // toneMapping: THREE.LinearToneMapping,
+        // toneMappingExposure: 2,
+        // preserveDrawingBuffer: true,
+      }}
     >
       <color attach="background" args={["#15151a"]} />
       <fog attach="fog" args={["#000", 10, 60]} />

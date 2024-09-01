@@ -2,12 +2,17 @@ import React, { useEffect, useRef } from "react";
 import { Shirt } from "./models/Shirt";
 import {
   CameraControls,
+  Cloud,
+  Clouds,
   Environment,
   MeshReflectorMaterial,
+  Stars,
 } from "@react-three/drei";
 import { Hoodie } from "./models/Hoodie";
 import useModelStore from "@/store/useStore";
 import { Stage2 } from "./models/Stage2";
+import * as THREE from "three";
+import { SmokePlane } from "./utils/SmokePlane";
 
 export default function Experience() {
   const selectedModel = useModelStore((state) => state.selectedModel);
@@ -27,12 +32,15 @@ export default function Experience() {
   }, [selectedModel]);
   return (
     <>
+      <Stars speed={0.5} count={2000} factor={3} fade={true} />
+
       <CameraControls
         ref={controls}
-        // enablePan={false}
-        // maxPolarAngle={Math.PI / 2 + 0.3}
-        // minDistance={0.4}
-        // maxDistance={3}
+        enablePan={false}
+        minPolarAngle={Math.PI / 2.2}
+        maxPolarAngle={Math.PI / 2}
+        minDistance={2}
+        maxDistance={6}
       />
       {selectedModel === "shirt" ? (
         <Shirt position={[0, 0.1, 0]} rotation-y={4.6} />
@@ -62,22 +70,25 @@ export default function Experience() {
         />
       </mesh>
 
-      {/* <directionalLight
-        castShadow
-        intensity={3.5}
-        position={[1, 10, 1]}
-        shadow-mapSize={[1024, 1024]}
-        shadow-camera-near={10}
-        shadow-camera-far={150}
-        shadow-camera-left={-10}
-        shadow-camera-right={10}
-        shadow-camera-top={10}
-        shadow-camera-bottom={-10}
-        shadow-bias={0.35}
-        shadow-normalBias={0.5}
-      /> */}
+      {/* <SmokePlane /> */}
 
-      {/* <directionalLightHelper /> */}
+      <mesh
+        scale={4}
+        position={[4, 0.1, -1.5]}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2.5]}
+      >
+        <ringGeometry args={[0.9, 1, 4, 1]} />
+        <meshStandardMaterial color="white" roughness={0.75} />
+      </mesh>
+      <mesh
+        scale={4}
+        position={[-3, 0.1, -1]}
+        rotation={[-Math.PI / 2, 0, Math.PI / 2.5]}
+      >
+        <ringGeometry args={[0.9, 1, 3, 1]} />
+        <meshStandardMaterial color="white" roughness={0.75} />
+      </mesh>
+
 
       <Environment preset="city" />
     </>
