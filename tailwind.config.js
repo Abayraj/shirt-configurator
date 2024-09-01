@@ -7,10 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
-      
       fontFamily: {
         primary: "var(--font-cormorant_upright)",
         secondary: "var(--font-open_sans)",
+        "myriad-light": ["MyriadProLight", "sans-serif"],
+        "myriad-semibold": ["MyriadProSemibold", "sans-serif"],
       },
     },
   },

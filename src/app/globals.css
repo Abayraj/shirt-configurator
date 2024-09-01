@@ -2,7 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+@font-face {
+  font-family: "MyriadProLight";
+  src: url("/MyriadPro-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MyriadProSemibold";
+  src: url("/MYRIADPRO-SEMIBOLD.OTF") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@layer base {
+  body {
+    font-family: "MyriadProLight", sans-serif;
+  }
+}
 
 * {
   margin: 0;
@@ -11,19 +29,8 @@
 }
 
 body {
-  /* background: #0f0c29; 
-  background: -webkit-linear-gradient(
-    to right,
-    #24243e,
-    #302b63,
-    #0f0c29
-  ); 
-  background: linear-gradient(
-    to right,
-    #24243e,
-    #302b63,
-    #0f0c29
-  );  */
+  background: #252525;
+  background: linear-gradient(15deg, #101010 0%, #252525 100%);
 
   color: #fff;
 }
@@ -76,105 +83,6 @@ body {
   background: #00000053;
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-}
-
-.frosted-glass {
-  position: relative;
-  padding: 8px;
-  cursor: pointer;
-  border-radius: 8px;
-  z-index: 1;
-  background: inherit;
-  overflow: hidden;
-}
-
-.frosted-glass:before {
-  content: "";
-  position: absolute;
-  background: inherit;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin: -20px;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-}
-
-.wave {
-  font-family: "Luckiest Guy", cursive;
-  margin: 0;
-  font-size: 2em;
-  padding: 0;
-  color: white;
-  text-shadow: 0 0.1em 20px rgba(0, 0, 0, 1), 0.05em -0.03em 0 rgba(0, 0, 0, 1),
-    0.05em 0.005em 0 rgba(0, 0, 0, 1), 0em 0.08em 0 rgba(0, 0, 0, 1),
-    0.05em 0.08em 0 rgba(0, 0, 0, 1), 0px -0.03em 0 rgba(0, 0, 0, 1),
-    -0.03em -0.03em 0 rgba(0, 0, 0, 1), -0.03em 0.08em 0 rgba(0, 0, 0, 1),
-    -0.03em 0 0 rgba(0, 0, 0, 1);
-  span {
-    transform: scale(0.9);
-    display: inline-block;
-  }
-  span:nth-child(1) {
-    animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
-      alternate;
-  }
-  span:nth-child(2) {
-    animation: bop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards infinite
-      alternate;
-  }
-  span:last-child {
-    animation: bopB 1s 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards
-      infinite alternate;
-  }
-}
-
-@keyframes bop {
-  0% {
-    transform: scale(0.9);
-  }
-  50%,
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes bopB {
-  0% {
-    transform: scale(0.9);
-  }
-  80%,
-  100% {
-    transform: scale(1) rotateZ(-3deg);
-  }
-}
-
-.backgroundAnimate {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #00416a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #8495a7,
-    #00416a
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #44525f,
-    #00416a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  z-index: 100;
 }
 
 .loader {

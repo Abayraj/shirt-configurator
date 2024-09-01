@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 export function Shirt(props) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF("/shirt.glb");
+  const { nodes, materials } = useGLTF("/shirt2.glb");
   const { color, isRotating, image } = useModelStore();
 
   const textureRef = useRef();
@@ -16,6 +16,7 @@ export function Shirt(props) {
   const texture = new THREE.CanvasTexture(ctx.canvas);
 
   texture.encoding = THREE.sRGBEncoding;
+  texture.toneMappingExposure = 3;
   texture.anisotropy = 16;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
@@ -26,8 +27,8 @@ export function Shirt(props) {
     if (isRotating) {
       ref.current.rotation.y += delta;
     }
-    if (materials.cloth) {
-      materials.cloth.color.set(color);
+    if (materials.Material32186) {
+      materials.Material32186.color.set(color);
     }
     if (textureRef.current) {
       textureRef.current.needsUpdate = true;
@@ -42,20 +43,25 @@ export function Shirt(props) {
 
   return (
     <group {...props} dispose={null} ref={ref}>
-      <mesh
+       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.Object_4.geometry}
-        material={materials.cloth}
-        rotation={[Math.PI / 2, 0, -1.619]}
+        geometry={nodes.SHIRT_1.geometry}
+        material={materials.Material32186}
+        position={[0.003, 0.316, 0.001]}
+        rotation={[Math.PI / 2, 0, 0]}
       />
-      <mesh
-        geometry={nodes.Object_4.geometry}
+       <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.SHIRT_1.geometry}
         material={customMaterial}
-        rotation={[Math.PI / 2, 0, -1.619]}
+        position={[0.003, 0.316, 0.001]}
+        rotation={[Math.PI / 2, 0, 0]}
       />
+    
     </group>
   );
 }
 
-useGLTF.preload("/shirt.glb");
+useGLTF.preload("/shirt2.glb");

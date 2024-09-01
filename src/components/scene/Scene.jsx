@@ -6,8 +6,8 @@ import Experience from "./Experience";
 export default function Scene() {
   return (
     <Canvas flat shadows camera={{ position: [0, 0, 3], fov: 30 }}>
-      {/* <color attach="background" args={["#15151a"]} /> */}
-      <fog attach="fog" args={["#15151a", 10, 15]} />
+      <color attach="background" args={["#15151a"]} />
+      {/* <fog attach="fog" args={["#15151a", 10, 15]} /> */}
       <Suspense fallback={null}>
         {/* <Background /> */}
         <Experience />

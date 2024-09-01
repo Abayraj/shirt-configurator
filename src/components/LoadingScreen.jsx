@@ -48,7 +48,7 @@ const Overlay = ({ onModelSelect, overlay }) => {
       className="h-svh w-full fixed top-0 left-0 overflow-hidden flex items-center justify-center z-40  ovarlay2 "
     >
       <div className="flex flex-col  items-center justify-center">
-        <h1 className=" text-3xl lg:text-4xl pb-10 lg:pb-20  font-bold wave">
+        <h1 className=" text-3xl lg:text-4xl pb-10 lg:pb-20  font-myriad-semibold ">
           <span>Choose</span>
           <span>Your</span>
           <span>Model</span>
@@ -57,33 +57,33 @@ const Overlay = ({ onModelSelect, overlay }) => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             transition={{ ease: "linear" }}
-            className="flex flex-col  items-center frosted-glass"
+            className="flex flex-col  items-center "
             onClick={() => onModelSelect("shirt")}
           >
             <Image
-              src="/shirt2.svg"
+              src="/shirt.jpg"
               alt="Shirt Icon"
               width={150}
               height={100}
             />
 
-            <h1 className="text-3xl uppercase font-secondary">Shirt</h1>
+            <h1 className="text-3xl uppercase font-myriad-light">Shirt</h1>
           </motion.div>
 
           <motion.div
             whileHover={{ scale: 1.1 }}
             transition={{ ease: "linear" }}
-            className="flex flex-col items-center  frosted-glass "
+            className="flex flex-col items-center overflow-hidden  "
             onClick={() => onModelSelect("hoodie")}
           >
             <Image
-              src="/hoodie2.svg"
+              src="/hoodie.jpg"
               alt="Shirt Icon"
               width={150}
               height={100}
             />
 
-            <h1 className="text-3xl uppercase font-secondary">Hoodie</h1>
+            <h1 className="text-3xl uppercase font-myriad-light">Hoodie</h1>
           </motion.div>
         </div>
       </div>

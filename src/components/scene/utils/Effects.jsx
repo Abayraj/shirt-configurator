@@ -42,10 +42,10 @@ export default function Effects() {
       <Bloom
         luminanceThreshold={0}
         mipmapBlur
-        luminanceSmoothing={0}
+        luminanceSmoothing={200}
         intensity={0.1}
       />
-      {/* <LUT lut={texture} /> */}
+      <LUT lut={texture} />
     </EffectComposer>
   );
 }

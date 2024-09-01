@@ -12,12 +12,12 @@ export default function Home() {
       <LoadingScreen />
       {/* <Leva hidden /> */}
       <Navbar />
-      <div className="video-background fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
+      {/* <div className="video-background fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
         <video autoPlay muted loop id="bg-video">
           <source src="/bg.mp4" type="video/mp4" />
           Your browser does not support HTML5 video.
         </video>
-      </div>
+      </div> */}
       <div className="h-svh w-full flex flex-col items-center">
         <div className="w-full h-[60%] relative lg:fixed lg:top-0 lg:left-0 lg:h-svh lg:w-full overflow-hidden">
           <Scene />

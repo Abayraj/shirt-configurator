@@ -165,6 +165,7 @@ export default function ImageKonva() {
         <div class="relative  bg-slate-950 rounded">
           <div className="relative z-20">
             <Stage
+            
               width={300}
               height={300}
               ref={stageRef}
