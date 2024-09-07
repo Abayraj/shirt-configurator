@@ -19,7 +19,7 @@ export default function Scene() {
       }}
     >
       <color attach="background" args={["#15151a"]} />
-      <fog attach="fog" args={["#000", 10, 60]} />
+      {/* <fog attach="fog" args={["#000", 10, 30]} /> */}
       <Suspense fallback={null}>
         <Experience />
         <Effects />

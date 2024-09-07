@@ -1,7 +1,7 @@
 import useModelStore from "@/store/useStore";
 import React, { useState } from "react";
 import { HexColorPicker } from "react-colorful";
-import ImageKonva from "./ImageKonva";
+import ImageKonva from "./configurator/ImageKonva";
 
 export default function MobileConfig() {
   const { isRotating, setIsRotating, color, setColor } = useModelStore();

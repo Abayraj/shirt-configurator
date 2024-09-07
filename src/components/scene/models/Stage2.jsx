@@ -10,13 +10,11 @@ export function Stage2(props) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        castShadow
         receiveShadow
         geometry={nodes.Plane007.geometry}
         material={materials.stage}
       />
       <mesh
-        castShadow
         receiveShadow
         geometry={nodes.Plane007_1.geometry}
         material={materials.light}

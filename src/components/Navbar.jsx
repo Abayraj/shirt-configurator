@@ -4,8 +4,8 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <div className=" fixed w-full h-16  p-2 z-10 ">
-      <header className="flex items-center justify-between p-2">
+    <div className="fixed top-0 w-full h-16  z-10">
+      <header className="flex items-center justify-between p-3">
         <div className="flex items-center gap-1 ">
           <div className="relative  rounded-lg overflow-clip">
             <Image src="/logo.jpg" alt="logo" width={130} height={100} />

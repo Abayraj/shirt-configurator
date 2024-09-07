@@ -2,7 +2,6 @@
 
 import useModelStore from "@/store/useStore";
 import { useGSAP } from "@gsap/react";
-import { useProgress } from "@react-three/drei";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
@@ -10,8 +9,6 @@ import React, { useRef, useState } from "react";
 import { Loader } from "@react-three/drei";
 
 export default function LoadingScreen() {
-  const { progress } = useProgress();
-
   const [overlay, setOverlay] = useState(false);
 
   const setSelectedModel = useModelStore((state) => state.setSelectedModel);
@@ -23,7 +20,7 @@ export default function LoadingScreen() {
   return (
     <>
       <Overlay onModelSelect={handleModelSelect} overlay={overlay} />
-      <LoaderScreen progress={progress} />
+      <LoaderScreen  />
     </>
   );
 }
@@ -87,36 +84,10 @@ const Overlay = ({ onModelSelect, overlay }) => {
   );
 };
 
-const LoaderScreen = ({ progress }) => {
-  // const loaderRef = useRef();
-
-  // useGSAP(() => {
-  //   if (progress === 100) {
-  //     gsap.to(loaderRef.current, {
-  //       duration: 1,
-  //       opacity: 0,
-  //       onComplete: () => {
-  //         loaderRef.current.style.display = "none";
-  //       },
-  //     });
-  //   }
-  // }, [progress]);
+const LoaderScreen = () => {
   return (
     <>
       <Loader />
     </>
-    // <div ref={loaderRef} className="backgroundAnimate">
-    //   <div className="loader JS_on">
-    //     <span className="binary"></span>
-    //     <span className="binary"></span>
-    //     <span className="getting-there ">LOADING STUFF...</span>
-    //   </div>
-    //   <div className="relative w-96 max-w-[calc(100%-50%)] bg-black rounded-3xl z-10 mt-6">
-    //     <div
-    //       className="h-1  origin-left transition-all duration-300 ease-in-out bg-white rounded-3xl"
-    //       style={{ width: `${progress}%` }}
-    //     ></div>
-    //   </div>
-    // </div>
   );
 };

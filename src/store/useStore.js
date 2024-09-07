@@ -9,6 +9,9 @@ const useModelStore = create((set) => ({
   setIsRotating: (value) => set({ isRotating: value }),
   image: null,
   setImage: (image) => set({ image }),
+  stage:"stage1",
+  setStage: (stage) => set({ stage }),
+
 }));
 
 export default useModelStore;

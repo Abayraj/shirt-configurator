@@ -127,7 +127,7 @@ export default function ImageKonva() {
     );
   };
   return (
-    <div className="flex flex-col items-start  lg:block">
+    <div className="block">
       <button
         className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md"
         onClick={handleButtonClick}
@@ -158,7 +158,7 @@ export default function ImageKonva() {
       </button>
 
       <div
-        className={`lg:absolute lg:pt-2 ${
+        className={`lg:relative lg:pt-2 ${
           open ? "flex" : "hidden"
         } transition-all duration-700 ease-in-out `}
       >
@@ -199,6 +199,7 @@ export default function ImageKonva() {
           <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none "></div>
         </div>
       </div>
+      
     </div>
   );
 }

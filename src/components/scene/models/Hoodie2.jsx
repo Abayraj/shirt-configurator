@@ -6,15 +6,15 @@ import * as THREE from "three";
 
 export function Hoodie(props) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF("/hoddiee.glb");
-  const { color, isRotating } = useModelStore();
+  const { nodes, materials } = useGLTF("/hoodie.glb");
+  const { color, isRotating, image } = useModelStore();
 
   const textureRef = useRef();
 
   const canvas = Array.from(document.getElementsByTagName("canvas"))[1];
   const ctx = canvas.getContext("2d");
   const texture = new THREE.CanvasTexture(ctx.canvas);
-  texture.flipY = false
+
   texture.encoding = THREE.sRGBEncoding;
   texture.anisotropy = 16;
   texture.wrapS = THREE.RepeatWrapping;
@@ -22,12 +22,13 @@ export function Hoodie(props) {
 
   textureRef.current = texture;
 
+
   useFrame((state, delta) => {
     if (isRotating) {
       ref.current.rotation.y += delta;
     }
-    if (materials.hodie) {
-      materials.hodie.color.set(color);
+    if (materials.hoodie) {
+      materials.hoodie.color.set(color);
     }
     if (textureRef.current) {
       textureRef.current.needsUpdate = true;
@@ -42,22 +43,33 @@ export function Hoodie(props) {
 
   return (
     <group {...props} dispose={null} ref={ref}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Baggy_Hoodie_obj.geometry}
-        material={materials.hodie}
-        position={[0.033, 0.478, -0.018]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
-      <mesh
-        geometry={nodes.Baggy_Hoodie_obj.geometry}
-        material={customMaterial}
-        position={[0.033, 0.478, -0.018]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
+      <group position={[0.013, 0.392, -0.095]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Object_11.geometry}
+          material={materials.hoodie}
+        />
+        <mesh geometry={nodes.Object_11.geometry} material={customMaterial} />
+      </group>
     </group>
   );
 }
 
-useGLTF.preload("/hoddiee.glb");
+useGLTF.preload("/hoodie.glb");
+
+
+
+
+
+
+{/* <group {...props} dispose={null}>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.Baggy_Hoodie_obj.geometry}
+  material={materials.hodie}
+  position={[0.033, 0.478, -0.018]}
+  rotation={[Math.PI / 2, 0, 0]}
+/>
+</group> */}

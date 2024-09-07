@@ -43,19 +43,19 @@ export function Shirt(props) {
 
   return (
     <group {...props} dispose={null} ref={ref}>
+      <mesh
+       castShadow
+       receiveShadow
+       geometry={nodes.SHIRT_1.geometry}
+       material={customMaterial}
+       position={[0.003, 0.316, 0.001]}
+       rotation={[Math.PI / 2, 0, 0]}
+     />
        <mesh
         castShadow
         receiveShadow
         geometry={nodes.SHIRT_1.geometry}
         material={materials.Material32186}
-        position={[0.003, 0.316, 0.001]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
-       <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.SHIRT_1.geometry}
-        material={customMaterial}
         position={[0.003, 0.316, 0.001]}
         rotation={[Math.PI / 2, 0, 0]}
       />
