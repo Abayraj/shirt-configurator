@@ -12,10 +12,8 @@ import { Hoodie } from "./models/Hoodie";
 import useModelStore from "@/store/useStore";
 import { Stage2 } from "./models/Stage2";
 import * as THREE from "three";
-import { Bot } from "./models/Bot";
 import { useControls } from "leva";
 import { Stage1 } from "./models/Stage1";
-import { Bg1 } from "./models/bg1";
 
 export default function Experience() {
   const { selectedModel, stage } = useModelStore();
@@ -150,7 +148,6 @@ export default function Experience() {
       )}
       {stage === "stage4" ? (
         <group>
-          {/* <Bg1 scale={2} position={[0,-0.2,0]} /> */}
           <Environment preset="studio" ground />
         </group>
       ) : (
