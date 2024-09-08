@@ -6,8 +6,8 @@ import * as THREE from "three";
 
 export function Shirt(props) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF("/shirt2.glb");
-  const { color, isRotating, image } = useModelStore();
+  const { nodes, materials } = useGLTF("/shirt_baked.glb");
+  const { color, isRotating } = useModelStore();
 
   const textureRef = useRef();
 
@@ -20,15 +20,15 @@ export function Shirt(props) {
   texture.anisotropy = 16;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-
+  texture.flipY = false;
   textureRef.current = texture;
 
   useFrame((state, delta) => {
     if (isRotating) {
       ref.current.rotation.y += delta;
     }
-    if (materials.Material32186) {
-      materials.Material32186.color.set(color);
+    if (materials.lambert1) {
+      materials.lambert1.color.set(color);
     }
     if (textureRef.current) {
       textureRef.current.needsUpdate = true;
@@ -44,24 +44,19 @@ export function Shirt(props) {
   return (
     <group {...props} dispose={null} ref={ref}>
       <mesh
-       castShadow
-       receiveShadow
-       geometry={nodes.SHIRT_1.geometry}
-       material={customMaterial}
-       position={[0.003, 0.316, 0.001]}
-       rotation={[Math.PI / 2, 0, 0]}
-     />
-       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.SHIRT_1.geometry}
-        material={materials.Material32186}
-        position={[0.003, 0.316, 0.001]}
-        rotation={[Math.PI / 2, 0, 0]}
+        geometry={nodes.T_Shirt_male.geometry}
+        material={materials.lambert1}
       />
-    
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.T_Shirt_male.geometry}
+        material={customMaterial}
+      />
     </group>
   );
 }
 
-useGLTF.preload("/shirt2.glb");
+useGLTF.preload("/shirt_baked.glb");

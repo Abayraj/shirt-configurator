@@ -45,16 +45,15 @@ export default function Experience() {
   }, [selectedModel]);
   return (
     <>
-      <Stars speed={0.5} count={2000} factor={3} fade={true} />
-      {/* <ambientLight intensity={1} /> */}
+      <ambientLight intensity={0.1} />
 
       <CameraControls
         ref={controls}
         enablePan={false}
-        // minPolarAngle={Math.PI / 2.2}
-        // maxPolarAngle={Math.PI / 2}
-        // minDistance={2}
-        // maxDistance={6}
+        minPolarAngle={Math.PI / 2.2}
+        maxPolarAngle={Math.PI / 2}
+        minDistance={2}
+        maxDistance={6}
       />
 
       {/* <directionalLight
@@ -73,7 +72,7 @@ export default function Experience() {
       /> */}
 
       {selectedModel === "shirt" ? (
-        <Shirt position={[0, 0.1, 0]} rotation-y={4.6} />
+        <Shirt position={[0, 0.5, 0]} scale={1} />
       ) : (
         ""
       )}
@@ -86,6 +85,8 @@ export default function Experience() {
 
       {stage === "stage1" ? (
         <group>
+          <Stars speed={0.5} count={2000} factor={3} fade={true} />
+
           <Stage2 scale={6} />
 
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
@@ -120,7 +121,7 @@ export default function Experience() {
             <ringGeometry args={[0.9, 1, 3, 1]} />
             <meshStandardMaterial color="white" roughness={0.75} />
           </mesh>
-          <Environment preset="lobby" />
+          <Environment preset="city" />
         </group>
       ) : (
         ""
@@ -148,15 +149,22 @@ export default function Experience() {
       )}
       {stage === "stage4" ? (
         <group>
-          <Environment preset="studio" ground />
+          <Environment
+            preset="city"
+            background
+            ground={{ height: 10, radius: "1000", scale: 50 }}
+          />
         </group>
       ) : (
         ""
       )}
       {stage === "stage5" ? (
         <group>
-          <Stage1 position={[0, -1.3, 0]} scale={0.9} />
-          <Environment preset="studio" />
+          <Environment
+            preset="forest"
+            background
+            ground={{ height:10, radius: "1000", scale: 10 }}
+          />
         </group>
       ) : (
         ""

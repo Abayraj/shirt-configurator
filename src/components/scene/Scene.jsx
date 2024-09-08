@@ -10,12 +10,12 @@ export default function Scene() {
     <Canvas
       dpr={[1, 1.5]}
       shadows
-      camera={{ position: [0, 0, 3], fov: 30 }}
+      camera={{ position: [0, 0, 3], fov: 35 }}
       gl={{
         antialias: true,
         // toneMapping: THREE.LinearToneMapping,
         // toneMappingExposure: 2,
-        // preserveDrawingBuffer: true,
+        preserveDrawingBuffer: true,
       }}
     >
       <color attach="background" args={["#15151a"]} />

@@ -35,7 +35,6 @@ body {
   color: #fff;
 }
 
-
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -75,4 +74,5 @@ body {
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
 }
+
 
