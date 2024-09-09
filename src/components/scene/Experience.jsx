@@ -51,8 +51,8 @@ export default function Experience() {
         ref={controls}
         enablePan={false}
         minPolarAngle={Math.PI / 2.2}
-        maxPolarAngle={Math.PI / 2}
-        minDistance={2}
+        maxPolarAngle={Math.PI / 2.1}
+        minDistance={1}
         maxDistance={6}
       />
 
@@ -72,7 +72,7 @@ export default function Experience() {
       /> */}
 
       {selectedModel === "shirt" ? (
-        <Shirt position={[0, 0.5, 0]} scale={1} />
+        <Shirt position={[0, 0.5, 0]} scale={0.085} />
       ) : (
         ""
       )}

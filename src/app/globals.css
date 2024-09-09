@@ -29,7 +29,7 @@
 }
 
 body {
-  background: #252525;
+  /* background: #d60000; */
   background: linear-gradient(15deg, #101010 0%, #252525 100%);
 
   color: #fff;
@@ -75,4 +75,9 @@ body {
   -webkit-backdrop-filter: blur(30px);
 }
 
-
+.glassy {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(5px);
+}

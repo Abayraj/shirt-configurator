@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 export function Shirt(props) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF("/shirt_baked.glb");
+  const { nodes, materials } = useGLTF("/virtualShirt.glb");
   const { color, isRotating } = useModelStore();
 
   const textureRef = useRef();
@@ -27,8 +27,8 @@ export function Shirt(props) {
     if (isRotating) {
       ref.current.rotation.y += delta;
     }
-    if (materials.lambert1) {
-      materials.lambert1.color.set(color);
+    if (materials.susannas_help_PBR) {
+      materials.susannas_help_PBR.color.set(color);
     }
     if (textureRef.current) {
       textureRef.current.needsUpdate = true;
@@ -46,17 +46,21 @@ export function Shirt(props) {
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.T_Shirt_male.geometry}
-        material={materials.lambert1}
+        geometry={nodes.oversizedtshirt.geometry}
+        material={materials.susannas_help_PBR}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={0.01}
       />
       <mesh
         castShadow
         receiveShadow
-        geometry={nodes.T_Shirt_male.geometry}
+        geometry={nodes.oversizedtshirt.geometry}
         material={customMaterial}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={0.01}
       />
     </group>
   );
 }
 
-useGLTF.preload("/shirt_baked.glb");
+useGLTF.preload("/virtualShirt.glb");

@@ -46,3 +46,20 @@ export function Shirt(props) {
 }
 
 useGLTF.preload("/shirt2.glb");
+
+
+//! model  ("/shirt_baked.glb")
+<group {...props} dispose={null} ref={ref}>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.T_Shirt_male.geometry}
+  material={materials.lambert1}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.T_Shirt_male.geometry}
+  material={customMaterial}
+/>
+</group>
