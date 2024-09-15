@@ -43,7 +43,7 @@ const Overlay = ({ onModelSelect, overlay }) => {
   return (
     <div
       ref={overlayRef}
-      className="h-svh w-full fixed top-0 left-0 overflow-hidden flex items-center justify-center z-40  ovarlay2 "
+      className="h-svh w-full fixed top-0 left-0 overflow-hidden flex items-center justify-center z-40  ovarlay "
     >
       <div className="flex flex-col  items-center justify-center">
         <h1 className=" text-3xl lg:text-4xl pb-10 lg:pb-20  font-myriad-semibold ">

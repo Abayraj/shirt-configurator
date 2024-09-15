@@ -11,17 +11,17 @@ export function Shirt(props) {
 
   const textureRef = useRef();
 
-  const canvas = Array.from(document.getElementsByTagName("canvas"))[1];
-  const ctx = canvas.getContext("2d");
-  const texture = new THREE.CanvasTexture(ctx.canvas);
+  // const canvas = Array.from(document.getElementsByTagName("canvas"))[1];
+  // const ctx = canvas.getContext("2d");
+  // const texture = new THREE.CanvasTexture(ctx.canvas);
 
-  texture.encoding = THREE.sRGBEncoding;
-  texture.toneMappingExposure = 3;
-  texture.anisotropy = 16;
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.flipY = false;
-  textureRef.current = texture;
+  // texture.encoding = THREE.sRGBEncoding;
+  // texture.toneMappingExposure = 3;
+  // texture.anisotropy = 16;
+  // texture.wrapS = THREE.RepeatWrapping;
+  // texture.wrapT = THREE.RepeatWrapping;
+  // texture.flipY = false;
+  // textureRef.current = texture;
 
   useFrame((state, delta) => {
     if (isRotating) {
