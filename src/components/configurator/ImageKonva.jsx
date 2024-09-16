@@ -10,7 +10,7 @@ export default function ImageKonva() {
   const fileInputRef = useRef(null);
   const [open, setOpen] = useState(false);
 
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState([]);
   const [imageWidth, setImageWidth] = useState(0);
   const [imageHeight, setImageHeight] = useState(0);
   const [imageX, setImageX] = useState(0);
@@ -28,28 +28,37 @@ export default function ImageKonva() {
   const handleButtonClick = () => {
     fileInputRef.current.click();
     setOpen(true);
-    setImage(true)
+    setImage(true);
   };
 
   const handleImageInput = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setUploadedImage(event.target.result);
-        const img = new window.Image();
-        img.src = event.target.result;
-        img.onload = () => {
-          const aspectRatio = img.width / img.height;
-          const newWidth = 150;
-          const newHeight = newWidth / aspectRatio;
-          setImageWidth(newWidth);
-          setImageHeight(newHeight);
-          setImageX((300 - newWidth) / 2);
-          setImageY((300 - newHeight) / 2);
+    const files = e.target.files;
+    if (files) {
+      const newImages = [];
+      Array.from(files).forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new window.Image();
+          img.src = event.target.result;
+          img.onload = () => {
+            const aspectRatio = img.width / img.height;
+            const newWidth = 150;
+            const newHeight = newWidth / aspectRatio;
+            newImages.push({
+              src: event.target.result,
+              width: newWidth,
+              height: newHeight,
+              x: (300 - newWidth) / 4,
+              y: (300 - newHeight) / 4,
+              rotation: 0,
+            });
+            if (newImages.length === files.length) {
+              setUploadedImage((prevImages) => [...prevImages, ...newImages]);
+            }
+          };
         };
-      };
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      });
     }
   };
 
@@ -129,14 +138,13 @@ export default function ImageKonva() {
   return (
     <div className="block">
       <button
-        className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md"
+        className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md text-sm"
         onClick={handleButtonClick}
       >
         <svg
           stroke="currentColor"
           fill="currentColor"
           strokeWidth="0"
-          className="hidden lg:flex"
           viewBox="0 0 24 24"
           focusable="false"
           height="1em"
@@ -165,41 +173,56 @@ export default function ImageKonva() {
         <div class="relative  bg-slate-950 rounded">
           <div className="relative z-20">
             <Stage
-            
-              width={300}
-              height={300}
+              width={200}
+              height={140}
               ref={stageRef}
               className=" z-20"
               onClick={handleStageClick}
               onTap={handleStageClick}
             >
               <Layer>
-                <KonvaImage
-                  uploadedImage={uploadedImage}
-                  imageX={imageX}
-                  imageY={imageY}
-                  imageWidth={imageWidth}
-                  imageHeight={imageHeight}
-                  setImageX={setImageX}
-                  setImageY={setImageY}
-                  rotation={rotation}
-                  setRotation={setRotation}
-                  isSelected={selectedId === "image"}
-                  onSelect={() => {
-                    setSelectedId("image");
-                  }}
-                  onTransformEnd={({ width, height }) => {
-                    setImageWidth(width);
-                    setImageHeight(height);
-                  }}
-                />
+                {uploadedImage.map((image, index) => (
+                  <KonvaImage
+                    key={index}
+                    uploadedImage={image.src}
+                    imageX={image.x}
+                    imageY={image.y}
+                    imageWidth={image.width}
+                    imageHeight={image.height}
+                    setImageX={(x) => {
+                      const newImages = [...uploadedImage];
+                      newImages[index].x = x;
+                      setUploadedImage(newImages);
+                    }}
+                    setImageY={(y) => {
+                      const newImages = [...uploadedImage];
+                      newImages[index].y = y;
+                      setUploadedImage(newImages);
+                    }}
+                    rotation={image.rotation}
+                    setRotation={(rotation) => {
+                      const newImages = [...uploadedImage];
+                      newImages[index].rotation = rotation;
+                      setUploadedImage(newImages);
+                    }}
+                    isSelected={selectedId === index}
+                    onSelect={() => {
+                      setSelectedId(index);
+                    }}
+                    onTransformEnd={({ width, height }) => {
+                      const newImages = [...uploadedImage];
+                      newImages[index].width = width;
+                      newImages[index].height = height;
+                      setUploadedImage(newImages);
+                    }}
+                  />
+                ))}
               </Layer>
             </Stage>
           </div>
           <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none "></div>
         </div>
       </div>
-      
     </div>
   );
 }

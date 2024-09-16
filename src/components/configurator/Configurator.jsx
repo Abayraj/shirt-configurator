@@ -15,14 +15,9 @@ const ImageKonva = dynamic(
 export default function Configurator() {
   const { isRotating, setIsRotating, color, setColor, setStage } =
     useModelStore();
-  const [openAccordion, setOpenAccordion] = useState(null);
 
   const handleRotationChange = (event) => {
     setIsRotating(event.target.checked);
-  };
-
-  const toggleAccordion = (index) => {
-    setOpenAccordion(openAccordion === index ? null : index);
   };
 
   const [openColor, setOpenColor] = useState(false);
@@ -181,81 +176,9 @@ export default function Configurator() {
 
       </div> */}
       </div>
-
-      <div className="absolute right-0 bottom-0 ovarlay2 p-3">
-        <h1 className=" uppercase text-center font-semibold text-xl font-secondary hidden lg:flex ">
-          Options
-        </h1>
-        <div className="flex justify-center items-center text-center gap-1 ">
-          <div className="button">
-            <input
-              type="checkbox"
-              checked={isRotating}
-              onChange={handleRotationChange}
-              id="rotation-checkbox"
-            />
-            <svg
-              height="40px"
-              width="40px"
-              version="1.1"
-              id="_x32_"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 512 512"
-              xmlSpace="preserve"
-              fill="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <g>
-                  <path
-                    className="st0"
-                    d="M324.643,155.912c-12.546-12.561-30.026-20.384-49.193-20.377c-19.141-0.007-36.654,7.816-49.167,20.377 c-12.557,12.524-20.373,30.026-20.373,49.186v24.468h-22.448v84.872c0,24.586,19.933,44.507,44.522,44.507h94.962 c24.589,0,44.515-19.922,44.515-44.507v-84.872H345.02v-24.468C345.02,185.938,337.203,168.436,324.643,155.912z M239.665,205.097 c0-4.986,1.019-9.664,2.812-13.946c2.691-6.386,7.263-11.893,12.978-15.758c5.738-3.871,12.535-6.093,19.995-6.101 c4.994,0,9.668,0.997,13.932,2.794c6.416,2.713,11.908,7.281,15.772,13.015c3.846,5.705,6.09,12.495,6.115,19.996v24.468h-71.604 V205.097z"
-                  ></path>
-                  <path
-                    className="st0"
-                    d="M489.709,163.068L462.723,7.754c-0.502-2.918-2.584-5.309-5.404-6.211c-2.819-0.902-5.899-0.161-8.003,1.914 l-35.665,35.246c-11.325-7.061-23.079-13.183-35.152-18.316C332.559,0.862,282.101-4.653,233.553,3.905 c-48.533,8.542-95.247,31.264-133.299,68.081c-25.37,24.527-44.625,53.123-57.643,83.75 c-19.522,45.929-25.037,96.384-16.484,144.938c8.55,48.54,31.266,95.247,68.081,133.31c24.53,25.355,53.127,44.617,83.743,57.632 c45.941,19.519,96.398,25.04,144.946,16.476c48.537-8.535,95.252-31.258,133.306-68.074l-30.62-31.654 c-21.08,20.384-45.208,35.467-70.878,45.38c-38.495,14.877-80.495,18.066-120.456,9.627c-39.965-8.44-77.807-28.413-108.384-60.015 c-20.391-21.081-35.47-45.212-45.387-70.868c-14.873-38.503-18.06-80.502-9.631-120.464c8.447-39.968,28.42-77.804,60.022-108.387 c21.084-20.384,45.208-35.474,70.875-45.387c38.495-14.87,80.495-18.06,120.456-9.628c39.964,8.447,77.81,28.42,108.39,60.016 l51.719,58.006c1.268,1.422,3.328,1.826,5.052,1.004C489.082,166.822,490.039,164.952,489.709,163.068z"
-                  ></path>
-                </g>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </div>
     </>
   );
 }
-
-const MobileView = () => {
-  const { isRotating, setIsRotating, color, setColor } = useModelStore();
-
-  const handleRotationChange = (event) => {
-    setIsRotating(event.target.checked);
-  };
-  return (
-    <div className="lg:hidden">
-      <Accordion title="Color">
-        <div className="small">
-          <HexColorPicker color={color} onChange={setColor} />
-        </div>
-        <div className="flex  justify-center items-center  gap-1 border rounded-md p-1">
-          <input
-            type="checkbox"
-            checked={isRotating}
-            onChange={handleRotationChange}
-            id="rotation-checkbox"
-          />
-          <p>Rotation</p>
-        </div>
-      </Accordion>
-    </div>
-  );
-};
 
 const Accordion = ({ children, title, isOpen, onToggle }) => {
   return (

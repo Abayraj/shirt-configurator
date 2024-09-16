@@ -2,10 +2,10 @@ import React, { useRef } from "react";
 import { Loader, useGLTF } from "@react-three/drei";
 
 export function Stage2(props) {
-  const { nodes, materials } = useGLTF("/tubelight.glb");
+  const { nodes, materials } = useGLTF("/stage1.glb");
 
-  materials.stage.emissiveIntensity = 1;
-  materials.light.emissiveIntensity = 20;
+  materials.stage.emissiveIntensity = 10;
+  materials.light.emissiveIntensity = 40;
 
   return (
     <group {...props} dispose={null}>
@@ -23,4 +23,4 @@ export function Stage2(props) {
   );
 }
 
-useGLTF.preload("/tubelight.glb");
+useGLTF.preload("/stage1.glb");

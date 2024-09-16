@@ -1,81 +1,104 @@
+import React from "react";
+import { FaTshirt } from "react-icons/fa";
+import { PiCoatHangerBold } from "react-icons/pi";
+import { IoManSharp } from "react-icons/io5";
+import { FaWalking } from "react-icons/fa";
+import { TbWind } from "react-icons/tb";
+import { FaCamera } from "react-icons/fa";
+import { Md3dRotation } from "react-icons/md";
 import useModelStore from "@/store/useStore";
-import React, { useState } from "react";
 import { HexColorPicker } from "react-colorful";
-import ImageKonva from "./configurator/ImageKonva";
+import dynamic from "next/dynamic";
+
+const ImageKonva = dynamic(
+  () => import("@/components/configurator/ImageKonva"),
+  {
+    ssr: false,
+  }
+);
 
 export default function MobileConfig() {
-  const { isRotating, setIsRotating, color, setColor } = useModelStore();
-
-  const [activeTab, setActiveTab] = useState("Logo");
-
-  const handleRotationChange = (event) => {
-    setIsRotating(event.target.checked);
-  };
-
+  const { isRotating, setIsRotating, color, setColor, setStage } =
+    useModelStore();
   return (
-    <div className="h-full w-full  rounded-lg shadow-lg">
-      <div className="flex space-x-4 border-b">
-        <TabButton
-          label="Colors"
-          isActive={activeTab === "Colors"}
-          onClick={() => setActiveTab("Colors")}
-        />
-
-        <TabButton
-          label="Logo"
-          isActive={activeTab === "Logo"}
-          onClick={() => setActiveTab("Logo")}
-        />
+    <div className="min-h-screen flex flex-col justify-between ">
+      <div>
+        <div className=" flex items-end justify-end mt-36  z-10">
+          <div className="flex flex-col justify-between gap-2">
+            <div className="button" onClick={() => setStage("stage1")}>
+              1
+            </div>
+            <div className="button" onClick={() => setStage("stage2")}>
+              2
+            </div>
+            <div className="button" onClick={() => setStage("stage3")}>
+              3
+            </div>
+            <div className="button" onClick={() => setStage("stage4")}>
+              4
+            </div>
+            <div className="button" onClick={() => setStage("stage5")}>
+              5
+            </div>
+          </div>
+        </div>
       </div>
 
-      {activeTab === "Colors" && (
-        <ColorSection
-          isRotating={isRotating}
-          handleRotationChange={handleRotationChange}
-          color={color}
-          setColor={setColor}
-        />
-      )}
-      {activeTab === "Logo" && <LogoSection />}
+      <div className="flex flex-col z-20">
+        {/* top */}
+
+        <div className="flex z-10 justify-between px-1 items-center">
+          <div className="flex gap-1">
+            <div className="button1" onClick={() => setIsRotating(false)}>
+              <Md3dRotation />
+            </div>
+            <div className="button1">
+              <FaTshirt />
+            </div>
+            <div className="button1">
+              <PiCoatHangerBold />
+            </div>
+          </div>
+        </div>
+
+        {/* bottom  */}
+
+        <div className="flex justify-between ovarlay2 px-1 mt-1 gap-3">
+          {/* first   */}
+          <div className="flex flex-col ">
+            <h1 className="text-center font-secondary">Animation</h1>
+            <div className="flex gap-1">
+              <div className="button1">
+                <IoManSharp />
+              </div>
+              <div className="button1">
+                <FaWalking />
+              </div>
+              <div className="button1">
+                <TbWind />
+              </div>
+            </div>
+            <h1 className="text-center font-secondary">Camera Animation</h1>
+            <div className="flex gap-1 justify-center">
+              <div className="button1">
+                <FaCamera />
+              </div>
+              <div className="button1">
+                <FaCamera />
+              </div>
+            </div>
+          </div>
+          {/* last  */}
+          <div className="flex flex-col justify-between  gap-1 flex-1">
+            <ImageKonva />
+            <div className=" small">
+              <HexColorPicker color={color} onChange={setColor} />
+            </div>
+          </div>
+        </div>
+
+        {/* end   */}
+      </div>
     </div>
   );
 }
-
-const TabButton = ({ label, isActive, onClick }) => (
-  <button
-    className={`px-4 py-2 ${
-      isActive ? "text-blue-500 border-b-2 border-blue-500" : "text-gray-600"
-    }`}
-    onClick={onClick}
-  >
-    {label}
-  </button>
-);
-
-const ColorSection = ({
-  isRotating,
-  handleRotationChange,
-  color,
-  setColor,
-}) => (
-  <div className="flex flex-col items-start  mt-3 pl-5 ">
-    <div className="flex justify-center items-center text-center gap-1 border-2 p-2 rounded-md mb-5">
-      <input
-        type="checkbox"
-        checked={isRotating}
-        onChange={handleRotationChange}
-        id="rotation-checkbox"
-      />
-      <p>Rotation</p>
-    </div>
-    <div className="small">
-      <HexColorPicker color={color} onChange={setColor} />
-    </div>
-  </div>
-);
-
-const LogoSection = () => (
-  <div className="mt-2 p-1">
-    <ImageKonva />
-  </div>
-);

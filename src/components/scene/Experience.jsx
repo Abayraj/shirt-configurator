@@ -89,7 +89,7 @@ export default function Experience() {
 
           <Stage2 scale={6} />
 
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.4, 0]}>
             <planeGeometry args={[50, 50]} />
             <MeshReflectorMaterial
               blur={[1000, 1000]}
@@ -105,22 +105,6 @@ export default function Experience() {
             />
           </mesh>
 
-          <mesh
-            scale={4}
-            position={[4, 0.1, -1.5]}
-            rotation={[-Math.PI / 2, 0, Math.PI / 2.5]}
-          >
-            <ringGeometry args={[0.9, 1, 4, 1]} />
-            <meshStandardMaterial color="white" roughness={0.75} />
-          </mesh>
-          <mesh
-            scale={4}
-            position={[-3, 0.1, -1]}
-            rotation={[-Math.PI / 2, 0, Math.PI / 2.5]}
-          >
-            <ringGeometry args={[0.9, 1, 3, 1]} />
-            <meshStandardMaterial color="white" roughness={0.75} />
-          </mesh>
           <Environment preset="city" />
         </group>
       ) : (
@@ -163,7 +147,7 @@ export default function Experience() {
           <Environment
             preset="forest"
             background
-            ground={{ height:10, radius: "1000", scale: 10 }}
+            ground={{ height: 10, radius: "1000", scale: 10 }}
           />
         </group>
       ) : (
