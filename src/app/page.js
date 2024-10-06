@@ -28,7 +28,7 @@ export default function Home() {
       <LoadingScreen />
       <Navbar />
 
-      <div className="fixed top-0 left-0 w-full h-svh overflow-hidden">
+      <div className="fixed top-0 left-0 w-screen h-screen overflow-hidden">
         <Scene />
       </div>
 

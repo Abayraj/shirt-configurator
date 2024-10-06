@@ -4,20 +4,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Image, Transformer } from "react-konva";
 import useImage from "use-image";
 import useModelStore from "@/store/useStore";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function ImageKonva() {
-  const { setImage } = useModelStore();
   const fileInputRef = useRef(null);
   const [open, setOpen] = useState(false);
 
   const [uploadedImage, setUploadedImage] = useState([]);
-  const [imageWidth, setImageWidth] = useState(0);
-  const [imageHeight, setImageHeight] = useState(0);
-  const [imageX, setImageX] = useState(0);
-  const [imageY, setImageY] = useState(0);
   const stageRef = useRef(null);
   const [selectedId, setSelectedId] = useState(null);
-  const [rotation, setRotation] = useState(0);
+
+  const isDesktop = useMediaQuery("(min-width: 768px)", true);
+
+  const isWidth = isDesktop ? 400 : 220;
+  const isheight = isDesktop ? 400 : 200;
 
   const handleStageClick = (e) => {
     if (e.target === e.target.getStage()) {
@@ -28,7 +28,6 @@ export default function ImageKonva() {
   const handleButtonClick = () => {
     fileInputRef.current.click();
     setOpen(true);
-    setImage(true);
   };
 
   const handleImageInput = (e) => {
@@ -42,14 +41,23 @@ export default function ImageKonva() {
           img.src = event.target.result;
           img.onload = () => {
             const aspectRatio = img.width / img.height;
-            const newWidth = 150;
-            const newHeight = newWidth / aspectRatio;
+
+            let newWidth, newHeight;
+
+            if (img.width > img.height) {
+              newWidth = Math.min(img.width, isWidth * 0.8);
+              newHeight = newWidth / aspectRatio;
+            } else {
+              newHeight = Math.min(img.height, isheight * 0.8);
+              newWidth = newHeight * aspectRatio;
+            }
+
             newImages.push({
               src: event.target.result,
               width: newWidth,
               height: newHeight,
-              x: (300 - newWidth) / 4,
-              y: (300 - newHeight) / 4,
+              x: (isWidth - newWidth) / 2,
+              y: (isheight - newHeight) / 2,
               rotation: 0,
             });
             if (newImages.length === files.length) {
@@ -170,57 +178,58 @@ export default function ImageKonva() {
           open ? "flex" : "hidden"
         } transition-all duration-700 ease-in-out `}
       >
-        <div class="relative  bg-slate-950 rounded">
-          <div className="relative z-20">
-            <Stage
-              width={200}
-              height={140}
-              ref={stageRef}
-              className=" z-20"
-              onClick={handleStageClick}
-              onTap={handleStageClick}
-            >
-              <Layer>
-                {uploadedImage.map((image, index) => (
-                  <KonvaImage
-                    key={index}
-                    uploadedImage={image.src}
-                    imageX={image.x}
-                    imageY={image.y}
-                    imageWidth={image.width}
-                    imageHeight={image.height}
-                    setImageX={(x) => {
-                      const newImages = [...uploadedImage];
-                      newImages[index].x = x;
-                      setUploadedImage(newImages);
-                    }}
-                    setImageY={(y) => {
-                      const newImages = [...uploadedImage];
-                      newImages[index].y = y;
-                      setUploadedImage(newImages);
-                    }}
-                    rotation={image.rotation}
-                    setRotation={(rotation) => {
-                      const newImages = [...uploadedImage];
-                      newImages[index].rotation = rotation;
-                      setUploadedImage(newImages);
-                    }}
-                    isSelected={selectedId === index}
-                    onSelect={() => {
-                      setSelectedId(index);
-                    }}
-                    onTransformEnd={({ width, height }) => {
-                      const newImages = [...uploadedImage];
-                      newImages[index].width = width;
-                      newImages[index].height = height;
-                      setUploadedImage(newImages);
-                    }}
-                  />
-                ))}
-              </Layer>
-            </Stage>
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none "></div>
+        <div
+          class={`relative bg-slate-950 rounded  guide overflow-clip ${
+            isDesktop ? "w-[400px]" : "w-[220px]"
+          } ${isDesktop ? "h-[400px]" : "h-[200px]"}`}
+        >
+          <Stage
+            width={isWidth}
+            height={isheight}
+            ref={stageRef}
+            className="absolute top-0 left-0 w-[400px] h-[400px] block   "
+            onClick={handleStageClick}
+            onTap={handleStageClick}
+          >
+            <Layer>
+              {uploadedImage.map((image, index) => (
+                <KonvaImage
+                  key={index}
+                  uploadedImage={image.src}
+                  imageX={image.x}
+                  imageY={image.y}
+                  imageWidth={image.width}
+                  imageHeight={image.height}
+                  setImageX={(x) => {
+                    const newImages = [...uploadedImage];
+                    newImages[index].x = x;
+                    setUploadedImage(newImages);
+                  }}
+                  setImageY={(y) => {
+                    const newImages = [...uploadedImage];
+                    newImages[index].y = y;
+                    setUploadedImage(newImages);
+                  }}
+                  rotation={image.rotation}
+                  setRotation={(rotation) => {
+                    const newImages = [...uploadedImage];
+                    newImages[index].rotation = rotation;
+                    setUploadedImage(newImages);
+                  }}
+                  isSelected={selectedId === index}
+                  onSelect={() => {
+                    setSelectedId(index);
+                  }}
+                  onTransformEnd={({ width, height }) => {
+                    const newImages = [...uploadedImage];
+                    newImages[index].width = width;
+                    newImages[index].height = height;
+                    setUploadedImage(newImages);
+                  }}
+                />
+              ))}
+            </Layer>
+          </Stage>
         </div>
       </div>
     </div>

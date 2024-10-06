@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 export function Hoodie(props) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF("/hoddiee.glb");
+  const { nodes, materials } = useGLTF("/models/hoodie/hoodie.glb");
   const { color, isRotating } = useModelStore();
 
   const textureRef = useRef();
@@ -14,7 +14,7 @@ export function Hoodie(props) {
   const canvas = Array.from(document.getElementsByTagName("canvas"))[1];
   const ctx = canvas.getContext("2d");
   const texture = new THREE.CanvasTexture(ctx.canvas);
-  texture.flipY = false
+  texture.flipY = false;
   texture.encoding = THREE.sRGBEncoding;
   texture.anisotropy = 16;
   texture.wrapS = THREE.RepeatWrapping;
@@ -60,4 +60,4 @@ export function Hoodie(props) {
   );
 }
 
-useGLTF.preload("/hoddiee.glb");
+useGLTF.preload("/models/hoodie/hoodie.glb");

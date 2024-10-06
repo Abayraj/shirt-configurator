@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FaTshirt } from "react-icons/fa";
 import { PiCoatHangerBold } from "react-icons/pi";
 import { IoManSharp } from "react-icons/io5";
@@ -18,8 +18,23 @@ const ImageKonva = dynamic(
 );
 
 export default function MobileConfig() {
-  const { isRotating, setIsRotating, color, setColor, setStage } =
-    useModelStore();
+  const fileInputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+  const {
+    image,
+    walking,
+    isRotating,
+    setIsRotating,
+    color,
+    setColor,
+    setStage,
+    showChain,
+    setshowChain,
+    setWalking,
+  } = useModelStore();
   return (
     <div className="min-h-screen flex flex-col justify-between ">
       <div>
@@ -37,9 +52,9 @@ export default function MobileConfig() {
             <div className="button" onClick={() => setStage("stage4")}>
               4
             </div>
-            <div className="button" onClick={() => setStage("stage5")}>
+            {/* <div className="button" onClick={() => setStage("stage5")}>
               5
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -48,15 +63,12 @@ export default function MobileConfig() {
         {/* top */}
 
         <div className="flex z-10 justify-between px-1 items-center">
-          <div className="flex gap-1">
+          <div className="flex  gap-1">
             <div className="button1" onClick={() => setIsRotating(false)}>
               <Md3dRotation />
             </div>
-            <div className="button1">
-              <FaTshirt />
-            </div>
-            <div className="button1">
-              <PiCoatHangerBold />
+            <div className="button1" onClick={() => setshowChain(true)}>
+              {showChain ? <PiCoatHangerBold /> : <FaTshirt />}
             </div>
           </div>
         </div>
@@ -67,15 +79,9 @@ export default function MobileConfig() {
           {/* first   */}
           <div className="flex flex-col ">
             <h1 className="text-center font-secondary">Animation</h1>
-            <div className="flex gap-1">
-              <div className="button1">
-                <IoManSharp />
-              </div>
-              <div className="button1">
-                <FaWalking />
-              </div>
-              <div className="button1">
-                <TbWind />
+            <div className="flex justify-center gap-1">
+              <div className="button1" onClick={() => setWalking(false)}>
+                {walking ? <FaWalking /> : <IoManSharp />}
               </div>
             </div>
             <h1 className="text-center font-secondary">Camera Animation</h1>
@@ -87,6 +93,33 @@ export default function MobileConfig() {
                 <FaCamera />
               </div>
             </div>
+            <button
+              className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md text-md mt-5 mb-2"
+              onClick={handleButtonClick}
+            >
+              <p>Load Background</p>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      useModelStore.getState().setImage(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+              />
+            </button>
+            {image && (
+              <div className="button" onClick={() => setStage("stage5")}>
+                View
+              </div>
+            )}
           </div>
           {/* last  */}
           <div className="flex flex-col justify-between  gap-1 flex-1">

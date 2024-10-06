@@ -1,3 +1,27 @@
+//! Virtual shirt model code below
+
+<group {...props} dispose={null} ref={ref}>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.oversizedtshirt.geometry}
+  material={materials.susannas_help_PBR}
+  rotation={[Math.PI / 2, 0, 0]}
+  scale={0.01}
+/>
+<mesh
+  castShadow
+  receiveShadow
+  geometry={nodes.oversizedtshirt.geometry}
+  material={customMaterial}
+  rotation={[Math.PI / 2, 0, 0]}
+  scale={0.01}
+/>
+</group>
+
+
+
+
 //! model shirt_baked.glb
 
 import React, { useRef } from "react";

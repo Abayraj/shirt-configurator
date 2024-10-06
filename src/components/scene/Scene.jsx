@@ -8,24 +8,20 @@ import * as THREE from "three";
 export default function Scene() {
   return (
     <Canvas
-      dpr={[1, 1.5]}
+      dpr={[1, 2]}
       shadows
-      camera={{ position: [0, 0, 3], fov: 35 }}
+      camera={{ position: [0, 0, 10], fov: 30 }}
       gl={{
         antialias: true,
-        // toneMapping: THREE.LinearToneMapping,
-        // toneMappingExposure: 2,
-        preserveDrawingBuffer: true,
+        // toneMapping: THREE.ACESFilmicToneMapping,
+        outputEncoding: THREE.sRGBEncoding,
+        // toneMappingExposure: 1,
       }}
     >
       <color attach="background" args={["#15151a"]} />
-      {/* <fog attach="fog" args={["#000", 10, 30]} /> */}
       <Suspense fallback={null}>
         <Experience />
-        <Effects />
       </Suspense>
-
-      <Preload all />
     </Canvas>
   );
 }

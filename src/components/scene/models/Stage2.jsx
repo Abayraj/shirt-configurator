@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Loader, useGLTF } from "@react-three/drei";
 
 export function Stage2(props) {
-  const { nodes, materials } = useGLTF("/stage1.glb");
+  const { nodes, materials } = useGLTF("/models/stage/stage1.glb");
 
   materials.stage.emissiveIntensity = 10;
   materials.light.emissiveIntensity = 40;
@@ -23,4 +23,4 @@ export function Stage2(props) {
   );
 }
 
-useGLTF.preload("/stage1.glb");
+useGLTF.preload("/models/stage/stage1.glb");

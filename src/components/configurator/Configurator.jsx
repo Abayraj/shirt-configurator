@@ -1,10 +1,15 @@
 "use client";
 
 import useModelStore from "@/store/useStore";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { HexColorPicker } from "react-colorful";
 import { IoMdArrowDropup } from "react-icons/io";
+import { Md3dRotation } from "react-icons/md";
+import { FaCamera, FaTshirt, FaWalking } from "react-icons/fa";
+import { PiCoatHangerBold } from "react-icons/pi";
+import { IoManSharp } from "react-icons/io5";
+import { TbWind } from "react-icons/tb";
 const ImageKonva = dynamic(
   () => import("@/components/configurator/ImageKonva"),
   {
@@ -13,20 +18,33 @@ const ImageKonva = dynamic(
 );
 
 export default function Configurator() {
-  const { isRotating, setIsRotating, color, setColor, setStage } =
-    useModelStore();
+  const {
+    image,
+    walking,
+    isRotating,
+    setIsRotating,
+    color,
+    setColor,
+    setStage,
+    showChain,
+    setshowChain,
+    setWalking,
+  } = useModelStore();
 
-  const handleRotationChange = (event) => {
-    setIsRotating(event.target.checked);
+  const fileInputRef = useRef(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+    // setStage("stage5");
   };
 
   const [openColor, setOpenColor] = useState(false);
 
   return (
     <>
-      <div className=" absolute left-0 top-20 ovarlay2 p-3">
+      <div className=" fixed left-0 top-20 ovarlay2 p-3 rounded-md">
         <h1 className=" uppercase text-center font-semibold text-xl font-secondary hidden lg:flex pb-3">
-          Configur
+          Configurator
         </h1>
 
         <ImageKonva />
@@ -151,58 +169,77 @@ export default function Configurator() {
           <div className="button" onClick={() => setStage("stage4")}>
             4
           </div>
-          <div className="button" onClick={() => setStage("stage5")}>
+          {/* <div className="button" onClick={() => setStage("stage5")}>
             5
-          </div>
+          </div> */}
         </div>
-
-        {/* <div className="block">
-        <Accordion
-          title="Rotation"
-          isOpen={openAccordion === 0}
-          onToggle={() => toggleAccordion(0)}
+        <button
+          className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md text-md mt-5 mb-3"
+          onClick={handleButtonClick}
         >
-          <div className="flex justify-center items-center text-center gap-1 ">
-            <input
-              type="checkbox"
-              checked={isRotating}
-              onChange={handleRotationChange}
-              id="rotation-checkbox"
-            />
-            <p>Rotation</p>
+          <p>Load Background</p>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                  useModelStore.getState().setImage(reader.result);
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+          />
+        </button>
+        {image && (
+          <div className="button" onClick={() => setStage("stage5")}>
+            View
           </div>
-        </Accordion>
+        )}
       </div>
 
-      </div> */}
+      <div className="fixed bottom-0 right-0 ovarlay2 px-10 py-5 rounded-lg ">
+        <h1 className="text-4xl text-center font-secondary tracking-tight pb-4">
+          Options
+        </h1>
+
+        {/* part1 */}
+        <div>
+          <div className="flex z-10 justify-between px-1 items-center">
+            <div className="flex w-full justify-center gap-4">
+              <div className="button1" onClick={() => setIsRotating(false)}>
+                <Md3dRotation />
+              </div>
+              <div className="button1" onClick={() => setshowChain(true)}>
+                {showChain ? <PiCoatHangerBold /> : <FaTshirt />}
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* part2 */}
+        <div className="flex flex-col ">
+          <h1 className="text-center font-secondary">Animation</h1>
+          <div className="flex justify-center gap-4">
+            <div className="button1" onClick={() => setWalking(false)}>
+              {walking ? <FaWalking /> : <IoManSharp />}
+            </div>
+          </div>
+          <h1 className="text-center font-secondary">Camera Animation</h1>
+          <div className="flex gap-1 justify-center">
+            <div className="button1">
+              <FaCamera />
+            </div>
+            <div className="button1">
+              <FaCamera />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
 }
 
-const Accordion = ({ children, title, isOpen, onToggle }) => {
-  return (
-    <div className=" p-2 border border-zinc-100 rounded-md w-full font-secondary">
-      <div
-        className="flex items-center justify-between cursor-pointer"
-        onClick={onToggle}
-      >
-        <div className="w-full ">{title}</div>
-        <div
-          className={`text-xl transform transition-transform duration-300 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-        >
-          <IoMdArrowDropup />
-        </div>
-      </div>
-      <div
-        className={`overflow-hidden  transition-all duration-500 ease-in-out flex justify-between items-start  ${
-          isOpen ? "max-h-[330px]" : "max-h-0"
-        }`}
-      >
-        {children}
-      </div>
-    </div>
-  );
-};

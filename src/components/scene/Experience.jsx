@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Shirt } from "./models/Shirt";
 import {
   CameraControls,
@@ -14,11 +14,14 @@ import { Stage2 } from "./models/Stage2";
 import * as THREE from "three";
 import { useControls } from "leva";
 import { Stage1 } from "./models/Stage1";
+import Effects from "./utils/Effects";
 
 export default function Experience() {
-  const { selectedModel, stage } = useModelStore();
+  const { selectedModel, stage, image } = useModelStore();
   const controls = useRef();
   const dLight = useRef();
+
+  const [texture, setTexture] = useState(null);
 
   useHelper(dLight, THREE.DirectionalLightHelper, 1, "red");
 
@@ -29,7 +32,16 @@ export default function Experience() {
   //   positionZ: { value: -20, min: -20, max: 20, step: 0.1 },
   // });
 
-  const bgmap = useTexture("/anime.jpg");
+  const forestTexture = useTexture("/images/forest.jpg");
+
+  useEffect(() => {
+    if (image) {
+      const loader = new THREE.TextureLoader();
+      loader.load(image, (loadedTexture) => {
+        setTexture(loadedTexture);
+      });
+    }
+  }, [image]);
 
   const intro = async () => {
     controls.current.dolly(-22);
@@ -45,14 +57,14 @@ export default function Experience() {
   }, [selectedModel]);
   return (
     <>
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={1} />
 
       <CameraControls
         ref={controls}
         enablePan={false}
         minPolarAngle={Math.PI / 2.2}
         maxPolarAngle={Math.PI / 2.1}
-        minDistance={1}
+        minDistance={2}
         maxDistance={6}
       />
 
@@ -72,7 +84,7 @@ export default function Experience() {
       /> */}
 
       {selectedModel === "shirt" ? (
-        <Shirt position={[0, 0.5, 0]} scale={0.085} />
+        <Shirt position={[0, 0.3, 0]} scale={0.6} />
       ) : (
         ""
       )}
@@ -86,8 +98,9 @@ export default function Experience() {
       {stage === "stage1" ? (
         <group>
           <Stars speed={0.5} count={2000} factor={3} fade={true} />
+          <Effects />
 
-          <Stage2 scale={6} />
+          <Stage2 scale={6} position={[0, 0, -0.01]} />
 
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.4, 0]}>
             <planeGeometry args={[50, 50]} />
@@ -124,7 +137,7 @@ export default function Experience() {
         <group>
           <mesh>
             <sphereGeometry args={[5, 64, 64]} />
-            <meshStandardMaterial map={bgmap} side={THREE.BackSide} />
+            <meshStandardMaterial map={forestTexture} side={THREE.BackSide} />
           </mesh>
           <Environment preset="sunset" />
         </group>
@@ -132,24 +145,24 @@ export default function Experience() {
         ""
       )}
       {stage === "stage4" ? (
-        <group>
-          <Environment
-            preset="city"
-            background
-            ground={{ height: 10, radius: "1000", scale: 50 }}
-          />
-        </group>
+        <>
+          <Environment preset="studio" />
+          <mesh>
+            <sphereGeometry args={[5, 64, 64]} />
+            <meshStandardMaterial side={THREE.BackSide} color={"#101010"} />
+          </mesh>
+        </>
       ) : (
         ""
       )}
       {stage === "stage5" ? (
-        <group>
-          <Environment
-            preset="forest"
-            background
-            ground={{ height: 10, radius: "1000", scale: 10 }}
-          />
-        </group>
+        <>
+          <Environment preset="sunset" />
+          <mesh>
+            <sphereGeometry args={[5, 64, 64]} />
+            <meshStandardMaterial map={texture} side={THREE.BackSide} />
+          </mesh>
+        </>
       ) : (
         ""
       )}

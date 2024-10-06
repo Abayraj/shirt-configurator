@@ -6,18 +6,19 @@ Source: https://sketchfab.com/3d-models/scifi-tron-studio-baked-88c7b7b5adc54b2e
 Title: Scifi Tron Studio | Baked
 */
 
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
 
 export function Stage1(props) {
-  const { nodes, materials } = useGLTF('/bg.glb')
+  const { nodes, materials } = useGLTF("/models/stage/bg.glb");
   return (
     <group {...props} dispose={null}>
       <group scale={0.01}>
         <group
           position={[0, 122.556, -99.564]}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={[237.378, 243.106, 10.544]}>
+          scale={[237.378, 243.106, 10.544]}
+        >
           <mesh
             castShadow
             receiveShadow
@@ -69,7 +70,8 @@ export function Stage1(props) {
         <group
           position={[-1435.453, 946.575, -215.334]}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={[22.008, 574.789, 100]}>
+          scale={[22.008, 574.789, 100]}
+        >
           <mesh
             castShadow
             receiveShadow
@@ -86,7 +88,8 @@ export function Stage1(props) {
         <group
           position={[-1823.353, 355.15, -855.587]}
           rotation={[-1.231, 0.4, 0.834]}
-          scale={[418.331, 113.488, 325.782]}>
+          scale={[418.331, 113.488, 325.782]}
+        >
           <mesh
             castShadow
             receiveShadow
@@ -103,7 +106,8 @@ export function Stage1(props) {
         <group
           position={[-1773.136, 316.913, 458.878]}
           rotation={[Math.PI, 0.193, 0.717]}
-          scale={[359.582, 97.55, 280.03]}>
+          scale={[359.582, 97.55, 280.03]}
+        >
           <mesh
             castShadow
             receiveShadow
@@ -175,7 +179,7 @@ export function Stage1(props) {
         />
       </group>
     </group>
-  )
+  );
 }
 
-useGLTF.preload('/bg.glb')
+useGLTF.preload("/models/stage/bg.glb");
