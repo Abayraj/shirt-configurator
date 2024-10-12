@@ -14,11 +14,10 @@ export default function Scene() {
       gl={{
         antialias: true,
         // toneMapping: THREE.ACESFilmicToneMapping,
-        outputEncoding: THREE.sRGBEncoding,
-        // toneMappingExposure: 1,
+        // toneMappingExposure: 2,
+        // outputEncoding: THREE.sRGBEncoding,
       }}
     >
-      <color attach="background" args={["#15151a"]} />
       <Suspense fallback={null}>
         <Experience />
       </Suspense>

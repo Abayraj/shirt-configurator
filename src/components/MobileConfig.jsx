@@ -68,7 +68,10 @@ export default function MobileConfig() {
               <Md3dRotation />
             </div>
             <div className="button1" onClick={() => setshowChain(true)}>
-              {showChain ? <PiCoatHangerBold /> : <FaTshirt />}
+              <FaTshirt />
+            </div>
+            <div className="button1" onClick={() => setshowChain(true)}>
+              <PiCoatHangerBold />
             </div>
           </div>
         </div>
@@ -81,7 +84,10 @@ export default function MobileConfig() {
             <h1 className="text-center font-secondary">Animation</h1>
             <div className="flex justify-center gap-1">
               <div className="button1" onClick={() => setWalking(false)}>
-                {walking ? <FaWalking /> : <IoManSharp />}
+                <IoManSharp />
+              </div>
+              <div className="button1" onClick={() => setWalking(false)}>
+                <FaWalking />
               </div>
             </div>
             <h1 className="text-center font-secondary">Camera Animation</h1>

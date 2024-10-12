@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { useAnimations, useGLTF, useTexture } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import React, { useEffect, useRef } from "react";
+import { useAnimations, useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import useModelStore from "@/store/useStore";
 import * as THREE from "three";
 
 export function Shirt(props) {
   const ref = useRef();
-  const { nodes, materials, animations } = useGLTF("/models/shirt/shirt.glb");
+  const { nodes, materials, animations } = useGLTF("/models/shirt/shirt1.glb");
   const { actions } = useAnimations(animations, ref);
-  const { color, isRotating, showChain, walking } = useModelStore();
+  const { color, isRotating, walking, canvasImage } = useModelStore();
 
   useEffect(() => {
     if (walking) {
@@ -18,11 +18,9 @@ export function Shirt(props) {
     }
   }, [walking, actions]);
 
-  const { gl } = useThree();
+  const textureRef = useRef(null);
 
-  const textureRef = useRef();
-
-  const canvas = Array.from(document.getElementsByTagName("canvas"))[1];
+  const canvas = canvasImage;
   const ctx = canvas.getContext("2d");
   const texture = new THREE.CanvasTexture(ctx.canvas);
 
@@ -31,7 +29,6 @@ export function Shirt(props) {
   texture.minFilter = THREE.LinearMipmapLinearFilter;
   texture.magFilter = THREE.LinearFilter;
   texture.generateMipmaps = true;
-  texture.anisotropy = gl.capabilities.getMaxAnisotropy();
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.flipY = false;
@@ -44,8 +41,8 @@ export function Shirt(props) {
     if (isRotating) {
       ref.current.rotation.y += delta;
     }
-    if (materials.shirt) {
-      materials.shirt.color.set(color);
+    custom.color.set(color);
+    if (materials.custom) {
     }
     if (textureRef.current) {
       textureRef.current.needsUpdate = true;
@@ -59,6 +56,14 @@ export function Shirt(props) {
     roughness: 1,
   });
 
+  const custom = new THREE.MeshStandardMaterial({
+    side: THREE.DoubleSide,
+    roughness: 1,
+    metalness: 0,
+    emissive: new THREE.Color(0x050505),
+    emissiveIntensity: 0.1,
+  });
+
   return (
     <group ref={ref} {...props} dispose={null}>
       <group name="Scene">
@@ -67,63 +72,20 @@ export function Shirt(props) {
           castShadow
           receiveShadow
           geometry={nodes.shirt.geometry}
-          material={materials.shirt}
+          material={custom}
           morphTargetDictionary={nodes.shirt.morphTargetDictionary}
           morphTargetInfluences={nodes.shirt.morphTargetInfluences}
-          position={[-0.027, 0.595, -0.276]}
-          rotation={[Math.PI / 2, 0, Math.PI]}
-          scale={0.002}
-        />
+        ></mesh>
         <mesh
           name="shirt"
           geometry={nodes.shirt.geometry}
           material={customMaterial}
           morphTargetDictionary={nodes.shirt.morphTargetDictionary}
           morphTargetInfluences={nodes.shirt.morphTargetInfluences}
-          position={[-0.027, 0.595, -0.276]}
-          rotation={[Math.PI / 2, 0, Math.PI]}
-          scale={0.002}
         />
-        {showChain && (
-          <group
-            name="chain"
-            position={[-0.038, 1.598, -0.263]}
-            rotation={[Math.PI / 2, 0, 3.111]}
-            scale={0.038}
-          >
-            <mesh
-              name="Obj_Avatar_Shape002"
-              castShadow
-              receiveShadow
-              geometry={nodes.Obj_Avatar_Shape002.geometry}
-              material={materials.Material2253121}
-            />
-            <mesh
-              name="Obj_Avatar_Shape002_1"
-              castShadow
-              receiveShadow
-              geometry={nodes.Obj_Avatar_Shape002_1.geometry}
-              material={materials.Material2253118}
-            />
-            <mesh
-              name="Obj_Avatar_Shape002_2"
-              castShadow
-              receiveShadow
-              geometry={nodes.Obj_Avatar_Shape002_2.geometry}
-              material={materials.Material2253119}
-            />
-            <mesh
-              name="Obj_Avatar_Shape002_3"
-              castShadow
-              receiveShadow
-              geometry={nodes.Obj_Avatar_Shape002_3.geometry}
-              material={materials.Material2253120}
-            />
-          </group>
-        )}
       </group>
     </group>
   );
 }
 
-useGLTF.preload("/models/shirt/shirt.glb");
+useGLTF.preload("/models/shirt/shirt1.glb");

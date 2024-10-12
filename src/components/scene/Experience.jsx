@@ -15,6 +15,8 @@ import * as THREE from "three";
 import { useControls } from "leva";
 import { Stage1 } from "./models/Stage1";
 import Effects from "./utils/Effects";
+import { PlaneModel } from "./models/Plane";
+import { Hanger } from "./models/Hanger";
 
 export default function Experience() {
   const { selectedModel, stage, image } = useModelStore();
@@ -53,11 +55,11 @@ export default function Experience() {
     if (selectedModel === "shirt" || "hoodie") {
       intro();
     }
-    controls.current.setLookAt(0, 1, 4, 0, 0.5, 0, true);
+    controls.current.setLookAt(0, 1, 2, 0, 0.5, 0, true);
   }, [selectedModel]);
   return (
     <>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={0.4} />
 
       <CameraControls
         ref={controls}
@@ -65,7 +67,7 @@ export default function Experience() {
         minPolarAngle={Math.PI / 2.2}
         maxPolarAngle={Math.PI / 2.1}
         minDistance={2}
-        maxDistance={6}
+        maxDistance={5}
       />
 
       {/* <directionalLight
@@ -84,7 +86,10 @@ export default function Experience() {
       /> */}
 
       {selectedModel === "shirt" ? (
-        <Shirt position={[0, 0.3, 0]} scale={0.6} />
+        <>
+          <Shirt position={[0, 0.1, 0]} scale={0.7} visible={false} />
+          <Hanger position={[0, 0.1, 0]} />
+        </>
       ) : (
         ""
       )}
@@ -96,7 +101,38 @@ export default function Experience() {
       )}
 
       {stage === "stage1" ? (
+        <>
+          <Environment preset="city" />
+          {/* <mesh>
+            <sphereGeometry args={[5, 64, 64]} />
+            <meshStandardMaterial side={THREE.BackSide} color={"#101010"} />
+          </mesh> */}
+        </>
+      ) : (
+        ""
+      )}
+
+      {stage === "stage2" ? (
         <group>
+          <Stage1 position={[0, -1.3, 0]} scale={0.9} />
+          <Environment preset="studio" />
+        </group>
+      ) : (
+        ""
+      )}
+
+      {stage === "stage3" ? (
+        <>
+          <PlaneModel scale={2} />
+          <Environment files={"/images/garden.jpg"} />
+        </>
+      ) : (
+        ""
+      )}
+      {stage === "stage4" ? (
+        <>
+          <color attach="background" args={["#101010"]} />
+
           <Stars speed={0.5} count={2000} factor={3} fade={true} />
           <Effects />
 
@@ -119,38 +155,6 @@ export default function Experience() {
           </mesh>
 
           <Environment preset="city" />
-        </group>
-      ) : (
-        ""
-      )}
-
-      {stage === "stage2" ? (
-        <group>
-          <Stage1 position={[0, -1.3, 0]} scale={0.9} />
-          <Environment preset="studio" />
-        </group>
-      ) : (
-        ""
-      )}
-
-      {stage === "stage3" ? (
-        <group>
-          <mesh>
-            <sphereGeometry args={[5, 64, 64]} />
-            <meshStandardMaterial map={forestTexture} side={THREE.BackSide} />
-          </mesh>
-          <Environment preset="sunset" />
-        </group>
-      ) : (
-        ""
-      )}
-      {stage === "stage4" ? (
-        <>
-          <Environment preset="studio" />
-          <mesh>
-            <sphereGeometry args={[5, 64, 64]} />
-            <meshStandardMaterial side={THREE.BackSide} color={"#101010"} />
-          </mesh>
         </>
       ) : (
         ""

@@ -9,7 +9,6 @@ import { Md3dRotation } from "react-icons/md";
 import { FaCamera, FaTshirt, FaWalking } from "react-icons/fa";
 import { PiCoatHangerBold } from "react-icons/pi";
 import { IoManSharp } from "react-icons/io5";
-import { TbWind } from "react-icons/tb";
 const ImageKonva = dynamic(
   () => import("@/components/configurator/ImageKonva"),
   {
@@ -215,7 +214,10 @@ export default function Configurator() {
                 <Md3dRotation />
               </div>
               <div className="button1" onClick={() => setshowChain(true)}>
-                {showChain ? <PiCoatHangerBold /> : <FaTshirt />}
+                <FaTshirt />
+              </div>
+              <div className="button1" onClick={() => setshowChain(false)}>
+                <PiCoatHangerBold />
               </div>
             </div>
           </div>
@@ -225,7 +227,10 @@ export default function Configurator() {
           <h1 className="text-center font-secondary">Animation</h1>
           <div className="flex justify-center gap-4">
             <div className="button1" onClick={() => setWalking(false)}>
-              {walking ? <FaWalking /> : <IoManSharp />}
+              <IoManSharp />
+            </div>
+            <div className="button1" onClick={() => setWalking(false)}>
+              <FaWalking />
             </div>
           </div>
           <h1 className="text-center font-secondary">Camera Animation</h1>
@@ -242,4 +247,3 @@ export default function Configurator() {
     </>
   );
 }
-
