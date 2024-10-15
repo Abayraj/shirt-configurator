@@ -19,7 +19,7 @@ import { PlaneModel } from "./models/Plane";
 import { Hanger } from "./models/Hanger";
 
 export default function Experience() {
-  const { selectedModel, stage, image } = useModelStore();
+  const { selectedModel, stage, image, walking } = useModelStore();
   const controls = useRef();
   const dLight = useRef();
 
@@ -87,8 +87,12 @@ export default function Experience() {
 
       {selectedModel === "shirt" ? (
         <>
-          <Shirt position={[0, 0.1, 0]} scale={0.7} visible={false} />
-          <Hanger position={[0, 0.1, 0]} />
+          <Shirt
+            position={[0, 0.6, 0]}
+            scale={0.7}
+            visible={walking ? true : false}
+          />
+          <Hanger position={[0, 0.1, 0]} visible={walking ? false : true} />
         </>
       ) : (
         ""

@@ -25,8 +25,6 @@ export default function Configurator() {
     color,
     setColor,
     setStage,
-    showChain,
-    setshowChain,
     setWalking,
   } = useModelStore();
 
@@ -213,10 +211,10 @@ export default function Configurator() {
               <div className="button1" onClick={() => setIsRotating(false)}>
                 <Md3dRotation />
               </div>
-              <div className="button1" onClick={() => setshowChain(true)}>
+              <div className="button1">
                 <FaTshirt />
               </div>
-              <div className="button1" onClick={() => setshowChain(false)}>
+              <div className="button1">
                 <PiCoatHangerBold />
               </div>
             </div>

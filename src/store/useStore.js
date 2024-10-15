@@ -11,8 +11,6 @@ const useModelStore = create((set) => ({
   setImage: (image) => set({ image }),
   stage: "stage1",
   setStage: (stage) => set({ stage }),
-  showChain: true,
-  setshowChain: () => set((state) => ({ showChain: !state.showChain })),
   walking: false,
   setWalking: () => set((state) => ({ walking: !state.walking })),
   canvasImage: null,

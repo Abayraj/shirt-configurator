@@ -154,24 +154,33 @@ export default function ImageKonva() {
   };
   return (
     <div className="block">
-      <button
-        className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md text-sm"
-        onClick={handleButtonClick}
-      >
-        <p className="font-secondary">Load Image</p>
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleImageInput}
-          accept="image/*"
-          className="hidden"
-        />
-      </button>
+      <div className="flex gap-1">
+        <button
+          className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md text-sm"
+          onClick={handleButtonClick}
+        >
+          <p className="font-secondary">Load Image</p>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleImageInput}
+            accept="image/*"
+            className="hidden"
+          />
+        </button>
+
+        <button
+          className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md text-sm"
+          onClick={() => setOpen((prev) => !prev)}
+        >
+          <p className="font-secondary"> {open ? "close" : "open"} </p>
+        </button>
+      </div>
 
       <div
         className={`lg:relative lg:pt-2 ${
           open ? "flex" : "hidden"
-        } transition-all duration-700 ease-in-out `}
+        } transition-all duration-700 ease-in-out  `}
       >
         <div
           class={`relative bg-slate-950 rounded  guide overflow-clip ${
