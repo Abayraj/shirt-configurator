@@ -19,18 +19,19 @@ export default function Home() {
     handleResize();
     window.addEventListener("resize", handleResize);
 
-    const gradient = new Gradient();
-    gradient.initGradient("#gradient-canvas");
+    // const gradient = new Gradient();
+    // gradient.initGradient("#gradient-canvas");
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  
   return (
     <>
       {/* <Leva hidden /> */}
       <LoadingScreen />
       <Navbar />
 
-      <canvas id="gradient-canvas" data-transition-in />
+      {/* <canvas id="gradient-canvas" data-transition-in /> */}
 
       <div className="fixed top-0 left-0 w-screen h-screen overflow-hidden">
         <Scene />

@@ -107,25 +107,16 @@ export default function Experience() {
       {stage === "stage1" ? (
         <>
           <Environment preset="city" />
-          {/* <mesh>
+          <mesh>
             <sphereGeometry args={[5, 64, 64]} />
-            <meshStandardMaterial side={THREE.BackSide} color={"#101010"} />
-          </mesh> */}
+            <meshBasicMaterial side={THREE.BackSide} color={"#121212"} />
+          </mesh>
         </>
       ) : (
         ""
       )}
 
       {stage === "stage2" ? (
-        <group>
-          <Stage1 position={[0, -1.3, 0]} scale={0.9} />
-          <Environment preset="studio" />
-        </group>
-      ) : (
-        ""
-      )}
-
-      {stage === "stage3" ? (
         <>
           <PlaneModel scale={2} />
           <Environment files={"/images/garden.jpg"} />
@@ -133,36 +124,16 @@ export default function Experience() {
       ) : (
         ""
       )}
-      {stage === "stage4" ? (
+
+      {stage === "stage3" ? (
         <>
-          <color attach="background" args={["#101010"]} />
-
-          <Stars speed={0.5} count={2000} factor={3} fade={true} />
-          <Effects />
-
-          <Stage2 scale={6} position={[0, 0, -0.01]} />
-
-          <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.4, 0]}>
-            <planeGeometry args={[50, 50]} />
-            <MeshReflectorMaterial
-              blur={[1000, 1000]}
-              resolution={256}
-              mixBlur={1}
-              mixStrength={80}
-              roughness={1}
-              depthScale={1.2}
-              minDepthThreshold={0.4}
-              maxDepthThreshold={1.4}
-              color="#000"
-              metalness={0.5}
-            />
-          </mesh>
-
+          {/* <PlaneModel scale={2} /> */}
           <Environment preset="city" />
         </>
       ) : (
         ""
       )}
+
       {stage === "stage5" ? (
         <>
           <Environment preset="sunset" />

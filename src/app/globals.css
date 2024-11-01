@@ -35,7 +35,8 @@
 }
 
 body {
-  /* background: #d60000; */
+  height: 100vh;
+  width: 100%;
   /* background: linear-gradient(15deg, #101010 0%, #252525 100%); */
   color: #fff;
 }
@@ -48,9 +49,9 @@ body {
   height: 100%;
   z-index: -1;
   --gradient-color-1: #000000;
-  --gradient-color-2: #202020;
+  --gradient-color-2: #121212;
   --gradient-color-3: #000000;
-  --gradient-color-4: #17191a;
+  --gradient-color-4: #131313;
 }
 
 .guide {

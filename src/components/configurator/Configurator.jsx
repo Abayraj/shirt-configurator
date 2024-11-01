@@ -32,7 +32,21 @@ export default function Configurator() {
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
-    // setStage("stage5");
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        document.body.style.backgroundImage = `url(${reader.result})`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundAttachment = "fixed";
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const [openColor, setOpenColor] = useState(false);
@@ -157,18 +171,10 @@ export default function Configurator() {
           <div className="button" onClick={() => setStage("stage1")}>
             1
           </div>
+
           <div className="button" onClick={() => setStage("stage2")}>
             2
           </div>
-          <div className="button" onClick={() => setStage("stage3")}>
-            3
-          </div>
-          <div className="button" onClick={() => setStage("stage4")}>
-            4
-          </div>
-          {/* <div className="button" onClick={() => setStage("stage5")}>
-            5
-          </div> */}
         </div>
         <button
           className="flex justify-center items-center gap-1 border border-zinc-100 p-1 rounded-md text-md mt-5 mb-3"
@@ -180,23 +186,13 @@ export default function Configurator() {
             type="file"
             accept="image/*"
             className="hidden"
-            onChange={(e) => {
-              const file = e.target.files[0];
-              if (file) {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                  useModelStore.getState().setImage(reader.result);
-                };
-                reader.readAsDataURL(file);
-              }
-            }}
+            onChange={handleImageChange}
           />
         </button>
-        {image && (
-          <div className="button" onClick={() => setStage("stage5")}>
-            View
-          </div>
-        )}
+
+        <div className="button" onClick={() => setStage("stage3")}>
+          View
+        </div>
       </div>
 
       <div className="fixed bottom-0 right-0 ovarlay2 px-10 py-5 rounded-lg ">
