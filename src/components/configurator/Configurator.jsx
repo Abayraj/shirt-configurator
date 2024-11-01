@@ -53,7 +53,7 @@ export default function Configurator() {
 
   return (
     <>
-      <div className=" fixed left-0 top-20 ovarlay2 p-3 rounded-md">
+      <div className=" fixed left-0 top-20 ovarlay2 p-3 rounded-md  min-w-[200px]">
         <h1 className=" uppercase text-center font-semibold text-xl font-secondary hidden lg:flex pb-3">
           Configurator
         </h1>
@@ -167,7 +167,7 @@ export default function Configurator() {
           Background
         </h1>
 
-        <div className=" flex justify-between pt-3 gap-2">
+        <div className=" flex pt-3 gap-4">
           <div className="button" onClick={() => setStage("stage1")}>
             1
           </div>

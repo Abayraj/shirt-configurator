@@ -6,7 +6,6 @@ import MobileConfig from "@/components/MobileConfig";
 import Navbar from "@/components/Navbar";
 import Scene from "@/components/scene/Scene";
 import { Gradient } from "@/components/scene/utils/Gradient";
-import { Leva } from "leva";
 import { useLayoutEffect, useState } from "react";
 
 export default function Home() {
@@ -24,10 +23,9 @@ export default function Home() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
   return (
     <>
-      {/* <Leva hidden /> */}
       <LoadingScreen />
       <Navbar />
 
@@ -38,8 +36,6 @@ export default function Home() {
       </div>
 
       {isMobile ? <MobileConfig /> : <Configurator />}
-      {/* <MobileConfig /> */}
-      {/* <Configurator /> */}
     </>
   );
 }

@@ -23,6 +23,22 @@ export default function MobileConfig() {
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        document.body.style.backgroundImage = `url(${reader.result})`;
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundAttachment = "fixed";
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const {
     image,
     walking,
@@ -31,8 +47,6 @@ export default function MobileConfig() {
     color,
     setColor,
     setStage,
-    showChain,
-    setshowChain,
     setWalking,
   } = useModelStore();
   return (
@@ -46,15 +60,6 @@ export default function MobileConfig() {
             <div className="button" onClick={() => setStage("stage2")}>
               2
             </div>
-            <div className="button" onClick={() => setStage("stage3")}>
-              3
-            </div>
-            <div className="button" onClick={() => setStage("stage4")}>
-              4
-            </div>
-            {/* <div className="button" onClick={() => setStage("stage5")}>
-              5
-            </div> */}
           </div>
         </div>
       </div>
@@ -67,10 +72,10 @@ export default function MobileConfig() {
             <div className="button1" onClick={() => setIsRotating(false)}>
               <Md3dRotation />
             </div>
-            <div className="button1" onClick={() => setshowChain(true)}>
+            <div className="button1">
               <FaTshirt />
             </div>
-            <div className="button1" onClick={() => setshowChain(true)}>
+            <div className="button1">
               <PiCoatHangerBold />
             </div>
           </div>
@@ -83,7 +88,7 @@ export default function MobileConfig() {
           <div className="flex flex-col ">
             <h1 className="text-center font-secondary">Animation</h1>
             <div className="flex justify-center gap-1">
-              <div className="button1" onClick={() => setWalking(false)}>
+              <div className="button1" onClick={() => setWalking(true)}>
                 <IoManSharp />
               </div>
               <div className="button1" onClick={() => setWalking(false)}>
@@ -109,23 +114,13 @@ export default function MobileConfig() {
                 type="file"
                 accept="image/*"
                 className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                      useModelStore.getState().setImage(reader.result);
-                    };
-                    reader.readAsDataURL(file);
-                  }
-                }}
+                onChange={handleImageChange}
               />
             </button>
-            {image && (
-              <div className="button" onClick={() => setStage("stage5")}>
-                View
-              </div>
-            )}
+
+            <div className="button" onClick={() => setStage("stage3")}>
+              View
+            </div>
           </div>
           {/* last  */}
           <div className="flex flex-col justify-between  gap-1 flex-1">

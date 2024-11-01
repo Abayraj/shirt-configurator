@@ -3,8 +3,6 @@ import { Shirt } from "./models/Shirt";
 import {
   CameraControls,
   Environment,
-  MeshReflectorMaterial,
-  Stars,
   useHelper,
   useTexture,
 } from "@react-three/drei";
@@ -12,7 +10,6 @@ import { Hoodie } from "./models/Hoodie";
 import useModelStore from "@/store/useStore";
 import { Stage2 } from "./models/Stage2";
 import * as THREE from "three";
-import { useControls } from "leva";
 import { Stage1 } from "./models/Stage1";
 import Effects from "./utils/Effects";
 import { PlaneModel } from "./models/Plane";
@@ -26,15 +23,6 @@ export default function Experience() {
   const [texture, setTexture] = useState(null);
 
   useHelper(dLight, THREE.DirectionalLightHelper, 1, "red");
-
-  // const { intensity, positionX, positionY, positionZ } = useControls({
-  //   intensity: { value: 4, min: 0, max: 20, step: 0.1 },
-  //   positionX: { value: 5, min: -20, max: 20, step: 0.1 },
-  //   positionY: { value: 16.6, min: -20, max: 20, step: 0.1 },
-  //   positionZ: { value: -20, min: -20, max: 20, step: 0.1 },
-  // });
-
-  const forestTexture = useTexture("/images/forest.jpg");
 
   useEffect(() => {
     if (image) {
@@ -70,21 +58,6 @@ export default function Experience() {
         maxDistance={5}
       />
 
-      {/* <directionalLight
-        ref={dLight}
-        castShadow
-        color={"#fff"}
-        intensity={intensity}
-        position={[positionX, positionY, positionZ]}
-        shadow-mapSize={[1024, 1024]}
-        // shadow-camera-left={-10}
-        // shadow-camera-right={10}
-        // shadow-camera-top={10}
-        // shadow-camera-bottom={-10}
-        // shadow-camera-near={0.5}
-        // shadow-camera-far={150}
-      /> */}
-
       {selectedModel === "shirt" ? (
         <>
           <Shirt
@@ -109,7 +82,7 @@ export default function Experience() {
           <Environment preset="city" />
           <mesh>
             <sphereGeometry args={[5, 64, 64]} />
-            <meshBasicMaterial side={THREE.BackSide} color={"#121212"} />
+            <meshBasicMaterial side={THREE.BackSide} color={"#181C14"} />
           </mesh>
         </>
       ) : (
@@ -129,18 +102,6 @@ export default function Experience() {
         <>
           {/* <PlaneModel scale={2} /> */}
           <Environment preset="city" />
-        </>
-      ) : (
-        ""
-      )}
-
-      {stage === "stage5" ? (
-        <>
-          <Environment preset="sunset" />
-          <mesh>
-            <sphereGeometry args={[5, 64, 64]} />
-            <meshStandardMaterial map={texture} side={THREE.BackSide} />
-          </mesh>
         </>
       ) : (
         ""

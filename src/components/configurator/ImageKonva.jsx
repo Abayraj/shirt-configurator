@@ -183,7 +183,7 @@ export default function ImageKonva() {
         } transition-all duration-700 ease-in-out  `}
       >
         <div
-          class={`relative bg-slate-950 rounded  guide overflow-clip ${
+          className={`relative bg-slate-950 rounded  guide overflow-clip ${
             isDesktop ? "w-[400px]" : "w-[220px]"
           } ${isDesktop ? "h-[400px]" : "h-[200px]"}`}
         >

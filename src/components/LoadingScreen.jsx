@@ -20,7 +20,7 @@ export default function LoadingScreen() {
   return (
     <>
       <Overlay onModelSelect={handleModelSelect} overlay={overlay} />
-      <LoaderScreen  />
+      <Loader />
     </>
   );
 }
@@ -58,9 +58,18 @@ const Overlay = ({ onModelSelect, overlay }) => {
             className="flex flex-col  items-center "
             onClick={() => onModelSelect("shirt")}
           >
-            <Image src="/shirt.jpg" alt="Shirt Icon" width={150} height={100} />
+            <Image
+              src="/shirt.jpg"
+              alt="Shirt Icon"
+              width={150}
+              height={100}
+              priority
+              className="rounded-md"
+            />
 
-            <h1 className="text-3xl uppercase font-myriad-light">Shirt</h1>
+            <h1 className="text-3xl uppercase font-myriad-light font-semibold">
+              Shirt
+            </h1>
           </motion.div>
 
           <motion.div
@@ -74,20 +83,16 @@ const Overlay = ({ onModelSelect, overlay }) => {
               alt="Shirt Icon"
               width={150}
               height={100}
+              priority
+              className="rounded-md"
             />
 
-            <h1 className="text-3xl uppercase font-myriad-light">Hoodie</h1>
+            <h1 className="text-3xl uppercase font-myriad-light font-semibold">
+              Hoodie
+            </h1>
           </motion.div>
         </div>
       </div>
     </div>
-  );
-};
-
-const LoaderScreen = () => {
-  return (
-    <>
-      <Loader />
-    </>
   );
 };

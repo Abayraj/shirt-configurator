@@ -1,9 +1,7 @@
-import { Preload, Loader } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense } from "react";
 import Experience from "./Experience";
 import Effects from "./utils/Effects";
-import * as THREE from "three";
 
 export default function Scene() {
   return (
