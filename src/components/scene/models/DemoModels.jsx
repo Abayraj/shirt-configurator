@@ -1,26 +1,23 @@
 //! Virtual shirt model code below
 
 <group {...props} dispose={null} ref={ref}>
-<mesh
-  castShadow
-  receiveShadow
-  geometry={nodes.oversizedtshirt.geometry}
-  material={materials.susannas_help_PBR}
-  rotation={[Math.PI / 2, 0, 0]}
-  scale={0.01}
-/>
-<mesh
-  castShadow
-  receiveShadow
-  geometry={nodes.oversizedtshirt.geometry}
-  material={customMaterial}
-  rotation={[Math.PI / 2, 0, 0]}
-  scale={0.01}
-/>
-</group>
-
-
-
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.oversizedtshirt.geometry}
+    material={materials.susannas_help_PBR}
+    rotation={[Math.PI / 2, 0, 0]}
+    scale={0.01}
+  />
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.oversizedtshirt.geometry}
+    material={customMaterial}
+    rotation={[Math.PI / 2, 0, 0]}
+    scale={0.01}
+  />
+</group>;
 
 //! model shirt_baked.glb
 
@@ -71,26 +68,23 @@ export function Shirt(props) {
 
 useGLTF.preload("/shirt2.glb");
 
-
 //! model  ("/shirt_baked.glb")
 <group {...props} dispose={null} ref={ref}>
-<mesh
-  castShadow
-  receiveShadow
-  geometry={nodes.T_Shirt_male.geometry}
-  material={materials.lambert1}
-/>
-<mesh
-  castShadow
-  receiveShadow
-  geometry={nodes.T_Shirt_male.geometry}
-  material={customMaterial}
-/>
-</group>
-
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.T_Shirt_male.geometry}
+    material={materials.lambert1}
+  />
+  <mesh
+    castShadow
+    receiveShadow
+    geometry={nodes.T_Shirt_male.geometry}
+    material={customMaterial}
+  />
+</group>;
 
 //! code for ui configurator design for mobile like geko.com
-
 
 export default function MobileConfig() {
   const { isRotating, setIsRotating, color, setColor } = useModelStore();
@@ -164,7 +158,5 @@ const ColorSection = ({
 );
 
 const LogoSection = () => (
-  <div className="mt-2 p-1">
-    {/* <ImageKonva /> */}
-  </div>
+  <div className="mt-2 p-1">{/* <ImageKonva /> */}</div>
 );

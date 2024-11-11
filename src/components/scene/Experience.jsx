@@ -8,13 +8,8 @@ import {
 } from "@react-three/drei";
 import { Hoodie } from "./models/Hoodie";
 import useModelStore from "@/store/useStore";
-import { Stage2 } from "./models/Stage2";
 import * as THREE from "three";
-import { Stage1 } from "./models/Stage1";
-import Effects from "./utils/Effects";
 import { PlaneModel } from "./models/Plane";
-import { Hanger } from "./models/Hanger";
-import { Test } from "./models/Test";
 
 export default function Experience() {
   const { selectedModel, stage, image, walking } = useModelStore();
@@ -44,7 +39,7 @@ export default function Experience() {
     if (selectedModel === "shirt" || "hoodie") {
       intro();
     }
-    controls.current.setLookAt(0, 1, 2, 0, 0.5, 0, true);
+    controls.current.setLookAt(0, 1, 5, 0, 0.5, 0, true);
   }, [selectedModel]);
   return (
     <>
@@ -62,7 +57,7 @@ export default function Experience() {
       {selectedModel === "shirt" ? (
         <>
           <Shirt
-            position={[0, -0.2, 0]}
+            position={[0, 0.1, 0]}
             scale={0.7}
             // visible={walking ? true : false}
           />
@@ -73,7 +68,7 @@ export default function Experience() {
 
       {selectedModel === "hoodie" ? (
         <>
-          <Test />/{/* <Hoodie position={[0, 0.1, 0]} scale={0.7} /> */}
+          <Hoodie />
         </>
       ) : (
         ""

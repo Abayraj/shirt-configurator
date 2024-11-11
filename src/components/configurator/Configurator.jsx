@@ -53,7 +53,7 @@ export default function Configurator() {
 
   return (
     <>
-      <div className=" fixed left-0 top-20 ovarlay2 p-3 rounded-md  min-w-[200px]">
+      <div className=" fixed left-0 top-20 ovarlay2 p-3 rounded-md  min-w-[250px]">
         <h1 className=" uppercase text-center font-semibold text-xl font-secondary hidden lg:flex pb-3">
           Configurator
         </h1>
