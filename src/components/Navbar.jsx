@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { IoCartOutline } from "react-icons/io5";
 import React from "react";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
@@ -17,7 +18,7 @@ export default function Navbar() {
               <IoCartOutline size={15} />
             </span>
             <span className="text-black text-[13px] tracking-tight font-sans font-medium">
-              Export
+              <Link href={"/payment"}>Export</Link>
             </span>
           </button>
         </nav>

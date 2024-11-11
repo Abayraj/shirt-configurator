@@ -6,15 +6,17 @@ import * as THREE from "three";
 
 export function Shirt(props) {
   const ref = useRef();
-  const { nodes, materials, animations } = useGLTF("/models/shirt/shirt1.glb");
+  const { nodes, materials, animations } = useGLTF(
+    "/models/shirt/shirtFinal.glb"
+  );
   const { actions } = useAnimations(animations, ref);
   const { color, isRotating, walking, canvasImage } = useModelStore();
 
   useEffect(() => {
     if (walking) {
-      actions["KeyAction.004"].reset().fadeIn(0.5).play();
+      actions["KeyAction"].reset().fadeIn(0.5).play();
     } else {
-      actions["KeyAction.004"].fadeOut(0.5).stop();
+      actions["KeyAction"].fadeOut(0.5).stop();
     }
   }, [walking, actions]);
 
@@ -68,24 +70,60 @@ export function Shirt(props) {
     <group ref={ref} {...props} dispose={null}>
       <group name="Scene">
         <mesh
-          name="shirt"
+          name="cloth_parent"
           castShadow
           receiveShadow
-          geometry={nodes.shirt.geometry}
+          geometry={nodes.cloth_parent.geometry}
           material={custom}
-          morphTargetDictionary={nodes.shirt.morphTargetDictionary}
-          morphTargetInfluences={nodes.shirt.morphTargetInfluences}
-        ></mesh>
-        <mesh
-          name="shirt"
-          geometry={nodes.shirt.geometry}
-          material={customMaterial}
-          morphTargetDictionary={nodes.shirt.morphTargetDictionary}
-          morphTargetInfluences={nodes.shirt.morphTargetInfluences}
+          morphTargetDictionary={nodes.cloth_parent.morphTargetDictionary}
+          morphTargetInfluences={nodes.cloth_parent.morphTargetInfluences}
+          position={[0.006, 0.014, 0]}
         />
+        <mesh
+          name="cloth_parent"
+          castShadow
+          receiveShadow
+          geometry={nodes.cloth_parent.geometry}
+          material={customMaterial}
+          morphTargetDictionary={nodes.cloth_parent.morphTargetDictionary}
+          morphTargetInfluences={nodes.cloth_parent.morphTargetInfluences}
+          position={[0.006, 0.014, 0]}
+        />
+        {!walking && (
+          <group name="chain" position={[-0.002, 2.265, -0.086]} scale={2.488}>
+            <mesh
+              name="chain001"
+              castShadow
+              receiveShadow
+              geometry={nodes.chain001.geometry}
+              material={materials["Material2253121.001"]}
+            />
+            <mesh
+              name="chain001_1"
+              castShadow
+              receiveShadow
+              geometry={nodes.chain001_1.geometry}
+              material={materials["Material2253118.001"]}
+            />
+            <mesh
+              name="chain001_2"
+              castShadow
+              receiveShadow
+              geometry={nodes.chain001_2.geometry}
+              material={materials["Material2253119.001"]}
+            />
+            <mesh
+              name="chain001_3"
+              castShadow
+              receiveShadow
+              geometry={nodes.chain001_3.geometry}
+              material={materials["Material2253120.001"]}
+            />
+          </group>
+        )}
       </group>
     </group>
   );
 }
 
-useGLTF.preload("/models/shirt/shirt1.glb");
+useGLTF.preload("/models/shirt/shirtFinal.glb");

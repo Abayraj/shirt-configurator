@@ -14,6 +14,7 @@ import { Stage1 } from "./models/Stage1";
 import Effects from "./utils/Effects";
 import { PlaneModel } from "./models/Plane";
 import { Hanger } from "./models/Hanger";
+import { Test } from "./models/Test";
 
 export default function Experience() {
   const { selectedModel, stage, image, walking } = useModelStore();
@@ -61,18 +62,19 @@ export default function Experience() {
       {selectedModel === "shirt" ? (
         <>
           <Shirt
-            position={[0, 0.6, 0]}
+            position={[0, -0.2, 0]}
             scale={0.7}
-            visible={walking ? true : false}
+            // visible={walking ? true : false}
           />
-          <Hanger position={[0, 0.1, 0]} visible={walking ? false : true} />
         </>
       ) : (
         ""
       )}
 
       {selectedModel === "hoodie" ? (
-        <Hoodie position={[0, 0.1, 0]} scale={0.7} />
+        <>
+          <Test />/{/* <Hoodie position={[0, 0.1, 0]} scale={0.7} /> */}
+        </>
       ) : (
         ""
       )}
